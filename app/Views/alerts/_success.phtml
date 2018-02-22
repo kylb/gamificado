@@ -1,0 +1,7 @@
+<?php if(isset($this->success) && $this->success): ?>
+    <div class="alert alert-success alert-dismissible" role ="alert" >
+        <?php foreach ($this->success as $msg): ?>
+            <p> <?php echo $msg; ?></p>
+        <?php endforeach; ?>
+    </div>
+<?php endif; ?>

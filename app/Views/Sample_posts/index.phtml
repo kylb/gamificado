@@ -1,0 +1,37 @@
+<div class="container">
+    <div class="">
+        <h1><?php echo $this->getPageTitle(); ?></h1>
+        <?php if($this->auth->check()) {?>
+            <a href="post/create"><button type="button" class="btn float-right">New</button></a>
+        <?php } ?>
+    </div>
+
+    <?php
+        $this->renderView('alerts/_success');
+        $this->renderView('alerts/_errors');
+        foreach($this->view->posts as $post){ ?>
+        <div class="posts">
+            <h3>
+                <a href="/post/<?php echo $post->id; ?>/show"><?php echo $post->title ?> </a>
+            </h3>
+            <p class="text-justify"><?php echo $post->content ?> </p>
+            <p>
+                <strong>Author: </strong><?php echo $post->user->name ?> <br />
+                <strong>Categories: </strong>
+
+                <?php
+                    $strCat = null;
+                    foreach($post->category as $cat){
+                        $strCat = $strCat . ', ' . $cat->name;
+                    }
+                    echo substr($strCat,2);
+                ?>
+                <?php if($this->auth->check() && $post->user->id == $this->auth->id()) {?>
+                    <a href="post/<?php echo $post->id; ?>/edit"><button type="button" class="btn float-right">Edit</button></a>
+                    <a href="post/<?php echo $post->id; ?>/delete" onclick="return confirm('Deletar esse post?')"><button type="button" class="btn float-right">Delete</button></a>
+                <?php } ?>
+            </p>
+        </div>
+    <?php } ?>
+</div>
+

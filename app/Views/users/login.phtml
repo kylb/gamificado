@@ -1,0 +1,28 @@
+<div class="login-page">
+
+    <div class="form">
+        <div class="">
+            <h3 class="panel-title"><?php echo $this->getPageTitle() ?></h3>
+        </div>
+
+        <span class="help-block"><?php $this->renderView('alerts/_errors') ?></span>
+
+        <form class="login-form" method="post" action="/login/auth">
+            <input type="text" name="email"
+                   <?php if(isset($this->inputs['email']) && !empty($this->inputs['email'])){
+                      echo 'value="' . $this->inputs['email'] . '"';
+                   } else {
+                       echo 'placeholder="email"';
+                   } ?>
+            />
+            <input type="password" name ="password" placeholder="password" />
+            <button>login</button>
+            <p class="message">Not registered? <a href="/user/create">Create an account</a></p>
+        </form>
+    </div>
+</div>
+<script>
+    $('.message a').click(function(){
+        $('form').animate({height: "toggle", opacity: "toggle"}, "slow");
+    });
+</script>

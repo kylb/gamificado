@@ -1,0 +1,19 @@
+<div class="container">
+    <?php if($this->auth->check()){?>
+    <span class="float-right">
+            Olá <?php echo $this->auth->name();?>
+    </span>
+    <?php } ?>
+    <div class="">
+        <h1><?php echo $this->view->nome ?></h1>
+    </div>
+    <div><?php
+            $this->renderView('alerts/_success');
+            $this->renderView('alerts/_errors');
+    ?></div>
+    <div class="">
+        <p class="text-justify">
+					Página em construção.
+        </p">
+    </div>
+</div>

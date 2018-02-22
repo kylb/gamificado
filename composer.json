@@ -1,0 +1,22 @@
+{
+  "name": "gamificado",
+  "description": "Projeto Final Trainee InfoJr 2017.2 - Forum UFBA",
+  "licence": "MIT",
+  "type": "project",
+  "authors": [
+    {"name": "Daniel Nunes Guedes", "email": "danielguedes@infojr.com.br"},
+		{"name": "Diego Fernandes", "email": "diegofernandes@infojr.com.br"},
+	  {"name": "Luan Lemos Almeida", "email": "lemosluan@infojr.com.br"},
+		{"name": "Tiago Gordiano", "email": "tiagosouza@infojr.com.br"}
+  ],
+  "autoload":{
+    "psr-4":{
+      "App\\": "app/",
+      "Core\\": "core/"
+    }
+  },
+  "require":{
+    "php": ">=5.6.4",
+    "illuminate/database": "^5.6"
+  }
+}
