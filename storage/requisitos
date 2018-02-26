@@ -1,0 +1,34 @@
+-> Fórum UFBA
+
+- Criação de uma Plataforma de Discussão para os Estudantes da UFBA Gamificado. O próposito da Ferramenta é a criação de um Fórum Personalizado, para debates argumentativos.
+
+-> Módulo de Uusário
+
+- Terá 2 Níveis de Usuários ( Comum e Adm ).
+- Terá Sistema de Cadastro e Login  com Verficiação.
+- Criação, Exclusão, Edição e Listagem de Usuarios.
+- ( Nome , Email ( Verificado ), Password, Graduação, Data de Nascimento, Foto, Pontos )
+
+-> Módulo de Publicação
+
+- O <<<administrador>>> irá <<<criar>>> uma <<<Publicação>>>, a partir dessa publicação, os <<<Usuarios>>> poderão criar seus <<<textos argumentativos>>> com base no Tema*. 
+Toda publicação terá um <<<posicionamento>>> Favor, Contra e Neutro. E os Textos argumentativos dos Usuarios devem ter o seu posicionamento definido durante a criação.
+- Toda publicação deve conter <<<Textos Referenciais>>> ( Artigos, ou Citação de Pessoas de Peso ) com o posicionamento a Favor e Contra.
+- Criação, Exclusão, Edição e Listagem de Publicações.
+- ( Titulo, Tema, Textos Referenciais )
+
+-> Módulo de Redações
+
+- Os <<<usuarios>>> poderão enviar sua <<<redação>>> para <<<cada publicação>>>. Toda redação pode ser <<<avaliada>>> positivamente ou negativamente somente <<<uma unica vez>>> por cada usuario <<<cadastrado>>>.
+
+- Criação, Exlusão, Edição e Listagem de Redações
+- Os <<<usuarios>>> podem <<<reportar>>> a Redação <<<diversas vezes>>>, e o <<<administrador>>> terá acesso a todos os Dados referentes as Redações para <<<verificação>>> de Fraude e Politica de Privacidade e Uso.
+- O <<<Usuario>>> poderá enviar <<<varios Links>>> como Referencias para a sua redação, no momento da <<<criação>>>.
+- O <<<Usuario>>> poderá <<<selecionar redações>>> ao qual a redação <<<está se contrapondo>>>.
+
+- ( Titulo, Conteúdo, Referências[], ContraResposta[] )
+
+-> Módulo de Gamificação
+
+- Depois de 1 Semana de Criação da Publicação, os melhores autores de Textos Argumentativos serão pontuados e as piores e mais reportadas serão penalizadas.
+- As melhores redações devem ser exibidas na página inicial.
