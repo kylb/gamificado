@@ -1,14 +1,20 @@
-<nav>
-    <header>
-        <ul class="float-left">
-            <li><a href="/">Home</a></li>
-            <li><a href="/forum">Forum</a></li>
-            <?php if($this->auth->check()){?>
-                <li><a href="/logout">Logout</a></li>
-            <?php } else { ?>
-                <li><a href="/login">Sing in</a></li>
-                <li><a href="/user/create">Register</a></li>
-            <?php } ?>
-        </ul>
-    </header>
-</nav>
+<header class="clearfix">
+    <div class="menu">
+        <div class="header-right">
+            <label for="open">
+                <span class="hidden-desktop"></span>
+            </label>
+            <input type="checkbox" name="" id="open">
+            <nav>
+                <a href="/">Home</a>
+                <a href="/forum">Forum</a>
+                <?php if($this->auth->check()){?>
+                    <a href="/logout">Logout</a>
+                <?php } else { ?>
+                    <a href="/login">Sing in</a>
+                    <a href="/user/create">Register</a>
+                <?php } ?>
+            </nav>
+        </div>
+    </div>
+</header>
