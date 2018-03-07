@@ -9,7 +9,7 @@ var_dump($this->view->teste);*/
             <div class="">
                 <h3 class="panel-title"><?php echo $this->getPageTitle() ?></h3>
             </div>
-            <form class="caduser-form" action="/user/<?php if($this->view->acao == 'edit') echo "update"; else echo "store"; ?>" method="post" accept-charset="utf-8">
+            <form class="caduser-form" enctype="multipart/form-data" action="/user/<?php if($this->view->acao == 'edit') echo "update"; else echo "store"; ?>" method="post" accept-charset="utf-8">
                 <?php
                     if($this->view->acao == 'edit'){
                        echo  '<input class="input" type="hidden" name="id"';
@@ -37,7 +37,7 @@ var_dump($this->view->teste);*/
                 <input class="input" type="text" name="email"
                     <?php
                         if($this->view->acao == 'edit'){
-                            echo 'value="' . $this->view->user->email . '"';
+                            echo ' readonly value="' . $this->view->user->email . '"';
                         } else{
                             if(isset($this->inputs['email']) && !empty($this->inputs['email'])){
                                 echo 'value="' . $this->inputs['email'] . '"';
@@ -50,6 +50,11 @@ var_dump($this->view->teste);*/
                 <?php if ($this->errors['email']): ?>
                     <span class="help-block"><?php echo $this->errors['email'] ?></span>
                 <?php endif; ?>
+
+               <div class="input">
+                   <strong>Escolha Uma Foto Bonita</strong>
+                   <input class="input" type="file" name="urlfoto"/>
+               </div>
 
                 <input class="input" type="text" name="graduacao"
                     <?php

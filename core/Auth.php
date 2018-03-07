@@ -28,7 +28,7 @@ class Auth{
     public static function id(){
         return self::$id;
     }
-    public static function name(){
+    public static function nome(){
         return self::$nome;
     }
     public static function email(){

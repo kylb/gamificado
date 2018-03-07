@@ -31,7 +31,7 @@ class UserController extends BaseController {
     public function login(){
         $this->view->nome = "Painel de Login";
         $this->setPageTitle($this->view->nome);
-        if(!Auth::check()){
+        if(!$this->auth->check()){
             $this->renderView("users/login","layout");
             return;
         } else{
@@ -47,7 +47,7 @@ class UserController extends BaseController {
         $this->view->user = $this->user->find($id);
         $this->view->acao = 'edit';
         //validacao de acesso indevido a rota de edicao de usuario
-        if(Auth::id() != $this->view->user->id && Auth::tipo() != 1){
+        if($this->auth->id() != $this->view->user->id && $this->auth->tipo() != 1){
             Redirect::route('/painel', [
                 'errors' => ['Ahaaa! Você não pode editar usuário de outra pessoa.']
             ]);
@@ -66,6 +66,14 @@ class UserController extends BaseController {
             'password'  => $request->post->password,
             'tipo'      => $request->post->tipo
         ];
+        //upload foto
+        if ( isset($request->files->urlfoto->name) && $request->files->urlfoto->error == 0 ) {
+            $extensao     = strtolower(pathinfo ( $request->files->urlfoto->name, PATHINFO_EXTENSION ));
+            $novoNome     = uniqid(time()) . '.' . $extensao;
+            $dirUrlFoto      = __DIR__ . '/../../public/assets/img/user/' . $novoNome;
+            move_uploaded_file($request->files->urlfoto->tmp_name, $dirUrlFoto);
+            $data['urlfoto'] = $novoNome;
+        }
 
         if(Validator::make($data,$this->user->rulesCreate(),$this->user)){
             Redirect::route("/user/create", "layout");
@@ -99,6 +107,15 @@ class UserController extends BaseController {
             'tipo'      => $request->post->tipo
         ];
 
+        //upload foto
+        if ( isset($request->files->urlfoto->name) && $request->files->urlfoto->error == 0 ) {
+            $extensao     = strtolower(pathinfo ( $request->files->urlfoto->name, PATHINFO_EXTENSION ));
+            $novoNome     = uniqid(time()) . '.' . $extensao;
+            $dirUrlFoto      = __DIR__ . '/../../public/assets/img/user/' . $novoNome;
+            move_uploaded_file($request->files->urlfoto->tmp_name, $dirUrlFoto);
+            $data['urlfoto'] = $novoNome;
+        }
+
         if(Validator::make($data,$this->user->rulesUpdate($id),$this->user)){
             Redirect::route("/user/{$id}/edit", "layout");
             return;
@@ -123,4 +140,15 @@ class UserController extends BaseController {
             return;
         }
     }
+
+    public function listar(){
+        $this->view->nome = "Listar Usuários";
+        $this->view->acao = 'listar';
+
+        $this->view->users = $this->user->All();
+
+        $this->setPageTitle("{$this->view->nome} - {$this->view->user->nome}");
+        $this->renderView("users/listar","layout");
+    }
+
 }

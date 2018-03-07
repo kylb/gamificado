@@ -3,8 +3,41 @@
 @import "alerts.css";
 @import "painel.css";
 @import "menu.css";
-*{margin: 0; padding: 0;}
+@import "table_list.css";
+*{margin: 0; padding: 0; font-family: "Roboto", sans-serif;}
 
+.user-data {
+    position: relative;
+    float: right;
+    width: 220px;
+    height: 160px;
+    display: inline-block;
+}
+.user-data a{
+    text-decoration: none;
+    color: white;
+    background-color: black;
+    display: block;
+}
+.user-data .nome{
+    text-align: center;
+    display: inline-block;
+    background-color: black;
+    color: white;
+    width: 100%;
+    font-weight: bold;
+    font-size: 1.2em;
+}
+.user-data .avatar {
+    float: right;
+    width: 67px;
+    height: 89px;
+    /*width: 150px;*/
+}
+
+.user-data .info {
+    display: inline-block;
+}
 .container {
     margin: 1em auto;
     width: 95%;
