@@ -1,0 +1,49 @@
+.menu-painel ul {
+    margin: 0;
+    list-style:none;
+    position:relative;
+    float:left;
+    /*border:1px solid #c0c0c0;*/
+}
+.menu-painel ul li {
+    margin: 0;
+    list-style: none;
+    position:relative;
+    float:left;
+    /*border-right:1px solid #c0c0c0;*/
+    width:150px;
+}
+
+.menu-painel ul li a {
+    display: block;
+    text-decoration: none;
+    color: white;
+    background: #000;
+    padding: 5px 10px;
+    /*border: 1px solid #ccc;*/
+}
+
+.menu-painel ul li a:hover {
+    background: rgba(255, 255, 255, .9);
+    color: black;
+    -moz-box-shadow:0 3px 10px 0 #CCC;
+    -webkit-box-shadow:0 3px 10px 0 #ccc;
+    text-shadow:0px 0px 5px #fff;
+}
+
+.menu-painel ul li ul {
+    position: absolute;
+    top: 25px;
+    left: 0;
+    display: none;
+}
+
+.menu-painel ul li:hover ul, ul li.over ul {
+    display: block;
+}
+
+.menu-painel ul li ul li{
+    display:block;
+    width:150px;
+    /*border:1px solid #c0c0c0;*/
+}

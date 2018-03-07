@@ -1,3 +1,30 @@
 @import "login.css";
+@import "new_user.css";
 @import "alerts.css";
+@import "painel.css";
+@import "menu.css";
+*{margin: 0; padding: 0;}
+
+.container {
+    margin: 1em auto;
+    width: 95%;
+}
+.content {
+    width: 100%;
+    position: relative;
+    float: left;
+}
+.float-right{
+    position: absolute;
+    right: 0px;
+}
+.float-left{
+
+}
+
+footer {
+    position: absolute;
+    bottom: 0px;
+    height: 60px;
+}
 

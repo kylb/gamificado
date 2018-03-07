@@ -4,12 +4,44 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="/assets/css/style.css">
-    <link rel="stylesheet" href="/assets/css/menu.css">
-    <title><?php echo $this->getPageTitle("|"); ?>Gamificado</title>
+    <title><?php echo $this->getPageTitle("|"); ?>Forum UFBA</title>
 </head>
-<body>
-    <?php require_once (__DIR__ . "/menu.phtml"); ?>
-    <p><?php $this->content();?></p>
+<body class="container">
+    <header class="clearfix">
+        <div class="menu">
+            <div class="header-right">
+                <label for="open">
+                    <span class="hidden-desktop"></span>
+                </label>
+                <input type="checkbox" name="" id="open">
+                <nav>
+                    <a href="/">Home</a>
+                    <a href="/forum">Forum</a>
+                    <?php if(!$this->auth->check()) { ?>
+                        <a href="/user/create">Criar Conta :)</a>
+                    <?php } ?>
+                    <?php if($this->auth->check()){?>
+                        <a href="/painel">Painel</a>
+                        <a href="/logout">Sair :(</a>
+                    <?php } else { ?>
+                        <a href="/login">Entrar :)</a>
+                    <?php } ?>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <?php if($this->auth->check() && $this->auth->verificado() == 0) {?>
+        <div class="alert alert-danger alert-dismissible" role ="alert">
+            <p class="center"> E-mail não verificado</p>
+        </div>
+    <?php } ?>
+    <main>
+        <section class="content">
+            <p><?php $this->content();?></p>
+        </section>
+    </main>
+
     <footer>
         <p>
             <?php echo $this->poweredBy . ' | '. date('Y')?>

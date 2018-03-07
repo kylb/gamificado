@@ -1,17 +1,18 @@
-<div class="container">
+
     <?php if($this->auth->check()){?>
-    <span class="float-right">
+        <span class="float-right">
             Olá <?php echo $this->auth->name();?>
-    </span>
+        </span>
     <?php } ?>
-    <div class="">
+<div>
+    <div>
         <h1><?php echo $this->view->nome ?></h1>
-    </div>
-    <div><?php
+        <?php
             $this->renderView('alerts/_success');
             $this->renderView('alerts/_errors');
-    ?></div>
-    <div class="">
+        ?>
+    </div>
+    <div>
         <p class="text-justify">
 					Página em construção.
         </p">
