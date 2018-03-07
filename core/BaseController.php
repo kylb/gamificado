@@ -30,7 +30,7 @@ abstract class BaseController{
         }
     }
 
-    protected function renderView($viewPath,$layoutPath = null){
+    public function renderView($viewPath,$layoutPath = null){
         $this->viewPath = $viewPath;
         $this->layoutPath = $layoutPath;
         if($layoutPath){

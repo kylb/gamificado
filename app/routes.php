@@ -1,12 +1,18 @@
 <?php
 //Rotas sem autenticação (Públicas) Sem o parâmetro 'auth'
 $route[] = ['/',                    'HomeController@index'];
+$route[] = ['/painel',              'HomeController@painel',    'auth'];
 $route[] = ['/user/create',         'UserController@create'];
 $route[] = ['/user/store',          'UserController@store'];
-//$route[] = ['/user/{id}/update',    'UserController@update']; Rota a implementar
+$route[] = ['/user/{id}/edit',      'UserController@edit',      'auth'];
+$route[] = ['/user/update',         'UserController@update',    'auth'];
+
+$route[] = ['/user/listar',         'UserController@listar',    'auth'];
+
 $route[] = ['/login',               'UserController@login'];
-$route[] = ['/logout',              'UserController@logout'];
 $route[] = ['/login/auth',          'UserController@auth'];
+$route[] = ['/logout',              'UserController@logout',    'auth'];
+
 
 
 /*

@@ -10,4 +10,12 @@ class HomeController extends BaseController {
         $this->renderView("home/index","layout");
 
     }
+
+    public function painel(){
+        $this->view->nome = "Painel";
+        $this->setPageTitle($this->view->nome);
+        $this->renderView("home/painel","layout");
+
+    }
+
 }

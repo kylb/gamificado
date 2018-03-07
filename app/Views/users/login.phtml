@@ -1,12 +1,9 @@
 <div class="login-page">
-
     <div class="form">
         <div class="">
             <h3 class="panel-title"><?php echo $this->getPageTitle() ?></h3>
         </div>
-
         <span class="help-block"><?php $this->renderView('alerts/_errors') ?></span>
-
         <form class="login-form" method="post" action="/login/auth">
             <input type="text" name="email"
                    <?php if(isset($this->inputs['email']) && !empty($this->inputs['email'])){

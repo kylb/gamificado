@@ -1,6 +1,11 @@
 <?php
 namespace Core;
 
+class GenericControler extends BaseController{
+    public function __construct() {
+        parent::__construct();
+    }
+}
 class Container{
     public static function newController($controller){
         $controller = "App\\Controllers\\" . $controller;
@@ -13,10 +18,7 @@ class Container{
     }
 
     public static function pageNotFound(){
-        if(file_exists(__DIR__ . "/../app/Views/404.phtml")){
-            return require_once (__DIR__. "/../app/Views/404.phtml");
-        } else{
-            echo "Error 404 | Page not found. <br />I'm sorry. We are working to improve your most perfect experience. Bye.<br />";
-        }
+        $controler = new GenericControler;
+        $controler->renderView("404","layout");
     }
 }

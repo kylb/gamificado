@@ -1,0 +1,23 @@
+<div class="menu-painel">
+    <nav>
+        <ul id="nav">
+            <?php if($this->auth->check()) { ?>
+                <li><a href="#">Painel Usuários</a>
+                    <ul>
+                        <li><a href="/user/<?php echo $this->auth->id()?>/edit">Editar Cadastro</a></li>
+                        <?php if($this->auth->tipo() == 1) { ?>
+                            <li><a href="/user/create">Registrar Usuário</a></li>
+                            <li><a href="/user/listar">Listar Usuários</a></li>
+                        <?php } ?>
+                    </ul>
+                </li>
+            <?php } ?>
+            <li><a href="#">Painel Pubicação</a>
+                <ul></ul>
+            </li>
+            <li><a href="#">Painel Redação</a>
+                <ul></ul>
+            </li>
+        </ul>
+    </nav>
+</div>

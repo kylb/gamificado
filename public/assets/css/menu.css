@@ -61,15 +61,15 @@ header{
 #open{
     display: none;
 }
-h1{
+header h1{
     font-weight: 300;
     line-height: 40px;
 }
-a{
+header a{
     text-decoration: none;
     color: white;
 }
-nav>a{
+header nav>a{
     position: relative;
     display: inline-block;
     font-size: 18px;
@@ -77,7 +77,7 @@ nav>a{
     padding: 0 2em;
     -webkit-transition: all .3s ease;
 }
-nav>a:hover{
+header nav>a:hover{
     background: rgba(255,255,255,.9);
     color: black;
 }
@@ -92,11 +92,11 @@ nav>a:hover{
         margin-bottom: 5%;
     }
 
-    ul li:nth-child(3) .box{
+    header ul li:nth-child(3) .box{
         clear: both;
     }
 
-    ul li:nth-child(2n) .box{
+    header ul li:nth-child(2n) .box{
         margin-right: 0;
         clear: right;
     }
@@ -104,7 +104,7 @@ nav>a:hover{
 
 /* Small monitor */
 @media (max-width: 979px){
-    nav>a{
+    header nav>a{
         padding: 0 1.5em;
     }
 }
@@ -114,10 +114,10 @@ nav>a:hover{
     .menu{
         width: 95%;
     }
-    nav>a{
+    header nav>a{
         padding: 0 2em;
     }
-    h1{
+    header h1{
         padding: .5em 0;
     }
     .header-left,
@@ -135,20 +135,21 @@ nav>a:hover{
     .menu{
         width: 90%;
     }
-    nav{
+    header nav{
         height: 0;
         overflow: hidden;
         -webkit-transition: all .3s ease;
     }
-    input[type="checkbox"]:checked + nav{
+
+    header input[type="checkbox"]:checked + nav{
         height: 205px;
     }
-    nav>a{
+    header nav>a{
         padding: 0 1em;
         display: block;
         border-bottom: solid 1px rgba(255,255,255,.1);
     }
-    h1{
+    header h1{
         padding: .5em 0;
     }
     .header-left,

@@ -1,8 +1,5 @@
 <?php
 namespace Core;
-
-use App\Models\User;
-
 trait Authenticate{
     public function login(){
         $this->setPageTitle('Login');
@@ -10,25 +7,34 @@ trait Authenticate{
     }
 
     public function auth($request){
-        $result = User::where('email',$request->post->email)->first();
+        $result = $this->user->findWhere(['email' => $request->post->email]);
         if($result && password_verify($request->post->password, $result->password)){
             $user = [
-                'id' => $result->id,
-                'name' => $result->name,
-                'email' => $result->email
+                'id'            => $result->id,
+                'nome'          => $result->nome,
+                'email'         => $result->email,
+                'graduacao'     => $result->graduacao,
+                'dtnasc'        => implode('/', array_reverse(explode('-', $result->dtnasc))),
+                'urlfoto'       => $result->urlfoto,
+                'pontos'        => $result->pontos,
+                'tipo'          => $result->tipo,
+                'verificado'    => $result->verificado
                 ];
             Session::set('user', $user);
-            return Redirect::route('/');
+            Redirect::route('/painel');
+            return ;
         }
 
-        return Redirect::route('/login',[
+        Redirect::route('/login',[
             'errors' => ['User or Password invalid. Are you sure you are you?'],
             'inputs' => ['email' => $request->post->email]
         ]);
+        return;
     }
 
     public function logout(){
         Session::destroy('user');
-        return Redirect::route('/login');
+        Redirect::route('/login');
+        return;
     }
 }

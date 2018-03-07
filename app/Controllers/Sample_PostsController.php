@@ -43,9 +43,10 @@ class PostsController extends BaseController
         $this->view->categories = Category::all();
         //validacao de acesso indevido a rota de edicao
         if(Auth::id() != $this->view->post->user->id){
-            return Redirect::route('/posts', [
+            Redirect::route('/posts', [
                 'errors' => ['Ahaaa! Você não pode editar posts de outro autor.']
             ]);
+            return;
         }
         $this->setPageTitle("{$this->view->nome} - {$this->view->post->title}");
         $this->renderView("posts/edit","layout");

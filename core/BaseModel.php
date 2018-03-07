@@ -1,13 +1,11 @@
 <?php
 namespace Core;
-use PDO;
-
 abstract class BaseModel{
-    private $pdo;
+    protected $pdo;
     protected $table;
 
-    public function __construct(PDO $pdo){
-        $this->pdo = $pdo;
+    public function __construct(){
+        $this->pdo = DataBase::getDatabase();
     }
 
     public function All(){
@@ -42,37 +40,6 @@ abstract class BaseModel{
         return $result;
     }
 
-    public function update (array $data, array $conditions){
-        $data = $this->prepareDataUpdate($data,$conditions);
-        $query = "UPDATE {$this->table} SET {$data[0][0]} WHERE 1 = 1 {$data[1][0]}";
-        $stmt = $this->pdo->prepare($query);
-        for($i = 0; $i < count($data[0][1]); $i++){
-            $stmt->bindValue("{$data[0][1][$i]}","{$data[0][2][$i]}");
-        }
-        for($i = 0; $i < count($data[1][1]); $i++){
-            $stmt->bindValue("{$data[1][1][$i]}","{$data[1][2][$i]}");
-        }
-        $result = $stmt->execute();
-        $stmt->closeCursor();
-        return $result;
-    }
-
-    /*
-     * kylb@github.com: 10/02/2018
-     * metodo refatorado para atender a mais de uma clausula where
-     */
-    public function delete (array $conditions){
-        $data = $this->prepareDataDelete($conditions);
-        $query = "DELETE FROM {$this->table} WHERE 1 = 1 {$data[1][0]}";
-        $stmt = $this->pdo->prepare($query);
-        for($i = 0; $i < count($data[1][1]); $i++){
-            $stmt->bindValue("{$data[1][1][$i]}","{$data[1][2][$i]}");
-        }
-        $result = $stmt->execute();
-        $stmt->closeCursor();
-        return $result;
-    }
-
     private function prepareDataInsert(array $data){
         $strKeys = "";
         $strBinds = "";
@@ -90,37 +57,47 @@ abstract class BaseModel{
         return [ $strKeys, $strBinds, $binds, $values ];
     }
 
-    /*
-     * kylb@github.com: 10/02/2018
-     * metodo refatorado para atender a mais de uma clausula where
-     */
-    private function prepareDataUpdate(array $data, array $conditions){
+    public function update(array $data, $id) {
+        $data = $this->prepareDataUpdate($data);
+        $query = "UPDATE {$this->table} SET {$data[0]}  WHERE id=:id";
+        $stmt = $this->pdo->prepare($query);
+        $stmt->bindValue(":id", $id);
+        for($i = 0; $i < count($data[1]); $i++){
+            $stmt->bindValue("{$data[1][$i]}", $data[2][$i]);
+        }
+        $result = $stmt->execute();
+        $stmt->closeCursor();
+        return $result;
+    }
+
+    public function delete($id){
+        $query = "DELETE FROM {$this->table} WHERE id=:id";
+        $stmt = $this->pdo->prepare($query);
+        $stmt->bindValue(":id", $id);
+        $result = $stmt->execute();
+        $stmt->closeCursor();
+        return $result;
+    }
+
+    private function prepareDataUpdate(array $data) {
         $strKeysBinds = "";
-        $strWhere = "";
         $binds = [];
         $values = [];
-        $bindsWhere = [];
-        $valuesWhere = [];
         foreach ($data as $key => $value){
-            $strKeysBinds = "{$strKeysBinds}, {$key}=:{$key}";
+            $strKeysBinds = "{$strKeysBinds},{$key}=:{$key}";
             $binds[] = ":{$key}";
             $values[] = $value;
         }
-        foreach ($conditions as $key => $value){
-            $strWhere = "{$strWhere} AND {$key}=:{$key}";
-            $bindsWhere[] = ":{$key}";
-            $valuesWhere[] = $value;
-        }
         $strKeysBinds = substr($strKeysBinds, 1);
-        return  [0 => [$strKeysBinds, $binds, $values],
-                 1 => [$strWhere, $bindsWhere, $valuesWhere]];
+        return [$strKeysBinds, $binds, $values];
     }
 
     /*
-     * kylb@github.com: 10/02/2018
-     * metodo criado para atender a mais de uma clausula where
+     * kylb@github.com: 23/03/2018
+     * Criação de métodos para CRUD com condições where
      */
-    private function prepareDataDelete(array $conditions){
+
+    private function prepareWhere(array $conditions){
         $strWhere = "";
         $bindsWhere = [];
         $valuesWhere = [];
@@ -129,7 +106,48 @@ abstract class BaseModel{
             $bindsWhere[] = ":{$key}";
             $valuesWhere[] = $value;
         }
-        return  [0 => ['', [], []],
-                 1 => [$strWhere, $bindsWhere, $valuesWhere]];
+        return  [$strWhere, $bindsWhere, $valuesWhere];
+    }
+
+    public function findWhere(array $conditions){
+        $where = $this->prepareWhere($conditions);
+        $query = "SELECT * FROM {$this->table} WHERE 1 = 1 {$where[0]}";
+        $stmt = $this->pdo->prepare($query);
+        for($i = 0; $i < count($where[1]); $i++){
+            $stmt->bindValue("{$where[1][$i]}","{$where[2][$i]}");
+        }
+        $stmt->execute();
+        $result = $stmt->fetch();
+        $stmt->closeCursor();
+        return $result;
+    }
+
+    public function updateWhere (array $data, array $conditions){
+        $data = $this->prepareDataUpdate($data);
+        $where = $this->prepareWhere($conditions);
+        $query = "UPDATE {$this->table} SET {$data[0]} WHERE 1 = 1 {$where[0]}";
+        $stmt = $this->pdo->prepare($query);
+        for($i = 0; $i < count($data[1]); $i++){
+            $stmt->bindValue("{$data[1][$i]}","{$data[2][$i]}");
+        }
+        for($i = 0; $i < count($where[1]); $i++){
+            $stmt->bindValue("{$where[1][$i]}","{$where[2][$i]}");
+        }
+        $result = $stmt->execute();
+        $stmt->closeCursor();
+        return $result;
+    }
+
+    public function deleteWhere (array $conditions){
+        $where = $this->prepareWhere($conditions);
+        $query = "DELETE FROM {$this->table} WHERE 1 = 1 {$where[0]}";
+        $stmt = $this->pdo->prepare($query);
+        for($i = 0; $i < count($where[1]); $i++){
+            $stmt->bindValue("{$where[1][$i]}","{$where[2][$i]}");
+        }
+        $result = $stmt->execute();
+        $stmt->closeCursor();
+        return $result;
     }
 }
+

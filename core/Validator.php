@@ -3,7 +3,7 @@ namespace Core;
 
 class Validator{
 
-    public static function make(array $data, array $rules){
+    public static function make(array $data, array $rules, BaseModel $con){
         $errors = null;
 
         foreach ($rules as $ruleKey => $ruleValue) {
@@ -31,10 +31,10 @@ class Validator{
                                         }
                                         break;
                                     case 'unique':
-                                        $objModel = "\\App\\Models\\" . $subItems[1];
-                                        $model = new $objModel;
-                                        $find = $model->where($subItems[2],$dataValue)->first();
-                                        //$errors['email'] = "{$find->id}";
+                                        //$objModel = "\\App\\Models\\" . $subItems[1];
+                                        $model = $con;
+                                        //$find = $model->where($subItems[2],$dataValue)->first(); //usando eloquent
+                                        $find = $model->findWhere([$subItems[2] => $dataValue]);
                                         if($find->id){
                                             if(isset($subItems[3]) && $find->id  == $subItems[3]){
                                                 break;
@@ -51,6 +51,14 @@ class Validator{
                                 switch ($itemValue) {
                                     case 'required':
                                         if ($dataValue == ' ' || empty($dataValue)) {
+                                            $errors["{$ruleKey}"] = "O campo {$ruleKey} deve ser PREENCHIDO.";
+                                        }
+                                        break;
+                                    case 'date':
+                                        $date = explode("/","$dataValue"); $d = $date[0]; $m = $date[1]; $y = $date[2];
+                                        // 1 = true (válida) | 0 = false (inválida)
+                                        $res = checkdate($m,$d,$y);
+                                        if (!$res) {
                                             $errors["{$ruleKey}"] = "O campo {$ruleKey} deve ser PREENCHIDO.";
                                         }
                                         break;
@@ -88,9 +96,10 @@ class Validator{
                                 }
                                 break;
                             case 'unique':
-                                $objModel = "\\App\\Models\\" . $items[1];
-                                $model = new $objModel;
-                                $find = $model->where($items[2],$dataValue)->first();
+                                //$objModel = "\\App\\Models\\" . $items[1];
+                                $model = $con;
+                                //$find = $model->where($items[2],$dataValue)->first(); //usando eloquent
+                                $find = $model->findWhere([$items[2] => $dataValue]);
                                 if($find->id){
                                     if(isset($items[3]) && $find->id == $items[3]){
                                         break;
@@ -108,6 +117,14 @@ class Validator{
                             case 'required':
                                 if ($dataValue == ' ' || empty($dataValue)) {
                                     $errors["{$ruleKey}"] = "O campo {$ruleKey} deve ser PREENCHIDO.";
+                                }
+                                break;
+                            case 'date':
+                                $date = explode("/","$dataValue"); $d = $date[0]; $m = $date[1]; $y = $date[2];
+                                // 1 = true (válida) | 0 = false (inválida)
+                                $res = checkdate($m,$d,$y);
+                                if (!$res) {
+                                    $errors["{$ruleKey}"] = "{$ruleKey} Inválida! Formato esperado: DD/MM/YYYY.";
                                 }
                                 break;
                             case 'email':
