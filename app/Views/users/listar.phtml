@@ -1,0 +1,28 @@
+<?php require_once __DIR__. '/../home/painel.phtml'; ?>
+<section class="painel">
+
+    <div class="caption"><?php echo $this->view->nome;?></div>
+    <div id="table">
+        <div class="header-row row">
+            <span class="cell">Nome</span>
+            <span class="cell">E-mail</span>
+            <span class="cell">Data Nasc.</span>
+            <span class="cell">Pontos</span>
+            <span class="cell">Tipo</span>
+            <span class="cell">Verificado</span>
+            <span class="cell">Ação</span>
+        </div>
+        <?php foreach ($this->view->users as $user) { ?>
+            <div class="row">
+                <span class="cell" data-label="nome"><?php echo $user->nome ?></span>
+                <span class="cell" data-label="email"><?php echo $user->email ?></span>
+                <span class="cell" data-label="dtnasc"><?php echo $user->dtnasc ?></span>
+                <span class="cell" data-label="pontos"><?php echo $user->pontos ?></span>
+                <span class="cell" data-label="tipo"><?php echo $user->tipo ?></span>
+                <span class="cell" data-label="verificado"><?php echo $user->verificado ?></span>
+                <span class="cell" data-label="Nome"><?php echo 'UD' ?></span>
+            </div>
+        <?php } ?>
+    </div>
+
+</section>

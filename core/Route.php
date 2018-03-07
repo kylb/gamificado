@@ -36,6 +36,15 @@ class Route{
         foreach ($_POST as $key => $value){
             $obj->post->$key = $value;
         }
+        foreach ($_FILES as $key => $value){
+            if(is_array($value)){
+                foreach ($value as $subKey => $subValue){
+                    $obj->files->$key->$subKey = $subValue;
+                }
+            } else{
+                $obj->files->$key = $value;
+            }
+        }
         return $obj;
     }
 

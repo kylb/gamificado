@@ -30,7 +30,7 @@ CREATE TABLE IF NOT EXISTS `forumufba`.`users` (
   `graduacao` VARCHAR(255) NULL COMMENT 'Texto livre para informar graduação/nível instrução do usuário\n',
   `dtnasc` DATE NULL COMMENT 'Data de nascimento\n',
   `urlfoto` VARCHAR(255) NULL,
-  `pontos` INT NULL,
+  `pontos` INT NULL DEFAULT 0,
   `tipo` INT NULL COMMENT '1 - admin\n2 - usuario\n',
   `verificado` TINYINT(1) NULL DEFAULT false,
   PRIMARY KEY (`id`),
