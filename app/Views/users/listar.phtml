@@ -1,6 +1,5 @@
 <?php require_once __DIR__. '/../home/painel.phtml'; ?>
 <section class="painel">
-
     <div class="caption"><?php echo $this->view->nome;?></div>
     <div id="table">
         <div class="header-row row">
@@ -20,9 +19,15 @@
                 <span class="cell" data-label="pontos"><?php echo $user->pontos ?></span>
                 <span class="cell" data-label="tipo"><?php echo $user->tipo ?></span>
                 <span class="cell" data-label="verificado"><?php echo $user->verificado ?></span>
-                <span class="cell" data-label="Nome"><?php echo 'UD' ?></span>
+                <span class="cell" data-label="Nome">
+                    <button class="button button-green">
+                        <a href="/user/<?php echo $user->id; ?>/edit"> <?php echo 'Editar' ?></a>
+                    </button>
+                    <button class="button button-red">
+                        <a href="/user/<?php echo $user->id; ?>/delete" onclick="return confirm('Inativar esse Usuário?')"> <?php echo 'Apagar' ?></a>
+                    </button>
+                </span>
             </div>
         <?php } ?>
     </div>
-
 </section>

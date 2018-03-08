@@ -151,4 +151,25 @@ class UserController extends BaseController {
         $this->renderView("users/listar","layout");
     }
 
+    public function delete($id){
+        try{
+            if(!$this->auth->check() || $this->auth->tipo() != 1 ){
+                Redirect::route('/painel', [
+                    'errors' => ['Ahaaa! Você não pode fazer isso.']
+                ]);
+                return;
+            }
+            $this->user->delete($id);
+            Redirect::route('/user/listar', [
+                'success' => ['Usuário inativated with success.']
+            ]);
+            return;
+        }catch(\Exception $e){
+            Redirect::route('/painel', [
+                'errors' => [$e->getMessage()]
+            ]);
+            return;
+        }
+    }
+
 }
