@@ -5,7 +5,12 @@ abstract class BaseModel{
     protected $table;
 
     public function __construct(){
-        $this->pdo = DataBase::getDatabase();
+        $pdo = func_get_arg(0);
+        if($pdo){
+            $this->pdo = $pdo;
+        } else{
+            $this->pdo = DataBase::getDatabase();
+        }
     }
 
     public function All(){
@@ -27,6 +32,16 @@ abstract class BaseModel{
         $stmt->closeCursor();
         return $result;
     }
+    public function findAll($id){
+        $query = "SELECT * FROM  {$this->table} WHERE id =:id";
+        $stmt = $this->pdo->prepare($query);
+        $stmt->bindValue(":id",$id);
+        $stmt->execute();
+        $result = $stmt->fetchAll();
+        $stmt->closeCursor();
+        return $result;
+    }
+
 
     public function create(array $data){
         $data = $this->prepareDataInsert($data);
@@ -118,6 +133,19 @@ abstract class BaseModel{
         }
         $stmt->execute();
         $result = $stmt->fetch();
+        $stmt->closeCursor();
+        return $result;
+    }
+
+    public function findWhereAll(array $conditions){
+        $where = $this->prepareWhere($conditions);
+        $query = "SELECT * FROM {$this->table} WHERE 1 = 1 {$where[0]}";
+        $stmt = $this->pdo->prepare($query);
+        for($i = 0; $i < count($where[1]); $i++){
+            $stmt->bindValue("{$where[1][$i]}","{$where[2][$i]}");
+        }
+        $stmt->execute();
+        $result = $stmt->fetchAll();
         $stmt->closeCursor();
         return $result;
     }

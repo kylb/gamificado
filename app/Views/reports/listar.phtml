@@ -1,0 +1,29 @@
+<section class="painel">
+    <div class="caption"><?php echo $this->view->nome;?></div>
+    <div id="table">
+        <div class="header-row row">
+            <span class="cell">Usuário</span>
+            <span class="cell">Redação</span>
+            <span class="cell">Reports</span>
+            <span class="cell">Conteúdo</span>
+            <span class="cell">Ação</span>
+        </div>
+        <?php foreach ($this->view->reports as $report) { ?>
+            <div class="row">
+                <span class="cell" data-label="user"><?php echo explode(" ", $report->user->nome)[0]; ?></span>
+                <span class="cell" data-label="titulo"><a href="/essay/<?php echo $report->essay->id; ?>/detalhar"><?php echo substr($report->essay->titulo,0,25); ?></a></span>
+                <span class="cell" data-label="reports"><?php echo $report->reports; ?></span>
+                <span class="cell" data-label="content"><?php echo substr($report->conteudo,0,25) . " (...)"; ?></span>
+                <span class="cell" data-label="content">
+                    <button class="button button-green">
+                        <a href="/report/<?php echo $report->id; ?>/detalhar"> <?php echo 'Detalhar' ?></a>
+                    </button>
+                    <button class="button button-red">
+                        <a href="/report/<?php echo $report->id; ?>/delete" onclick="return confirm('Inativar esse Usuário?')"> <?php echo 'Apagar' ?></a>
+                    </button>
+                </span>
+            </div>
+        <?php } ?>
+    </div>
+</section>
+

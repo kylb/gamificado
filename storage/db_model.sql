@@ -33,6 +33,7 @@ CREATE TABLE IF NOT EXISTS `forumufba`.`users` (
   `pontos` INT NULL DEFAULT 0,
   `tipo` INT NULL COMMENT '1 - admin\n2 - usuario\n',
   `verificado` TINYINT(1) NULL DEFAULT false,
+  'ativo' TINYINT(1) NULL DEFAULT  true,
   PRIMARY KEY (`id`),
   UNIQUE INDEX `index2` (`email` ASC))
 ENGINE = InnoDB
@@ -93,7 +94,7 @@ CREATE TABLE IF NOT EXISTS `forumufba`.`essays` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `titulo` VARCHAR(255) NULL,
   `conteudo` TEXT NULL,
-  `posicao` INT NULL COMMENT '1 - favor\n0 - neutro\n-1 - contra\n',
+  `posicao` INT NULL DEFAULT 0 COMMENT '1 - favor\n0 - neutro\n-1 - contra\n',
   `id_publication` INT NULL,
   `id_user` INT NULL,
   PRIMARY KEY (`id`),
@@ -119,10 +120,11 @@ DEFAULT CHARACTER SET = utf8;
 DROP TABLE IF EXISTS `forumufba`.`reports` ;
 
 CREATE TABLE IF NOT EXISTS `forumufba`.`reports` (
-  `conteudo` VARCHAR(45) NULL,
+  `id` INT AUTO_INCREMENT,
   `id_essay` INT NULL,
   `id_user` INT NULL,
-  `id` INT NULL,
+  `conteudo` TEXT NULL,
+  PRIMARY KEY (`id`),
   INDEX `fk_reports_1_idx` (`id_essay` ASC),
   INDEX `fk_reports_2_idx` (`id_user` ASC),
   CONSTRAINT `fk_reports_1`

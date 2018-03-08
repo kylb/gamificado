@@ -147,7 +147,7 @@ class UserController extends BaseController {
 
         $this->view->users = $this->user->All();
 
-        $this->setPageTitle("{$this->view->nome} - {$this->view->user->nome}");
+        $this->setPageTitle("{$this->view->nome}");
         $this->renderView("users/listar","layout");
     }
 

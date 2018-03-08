@@ -3,7 +3,7 @@ namespace App\Models;
 use Core\BaseModel;
 
 class UserBaseModel extends BaseModel{
-    public $table = 'users';
+    protected $table = 'users';
 
     public function rulesCreate(){
         return [

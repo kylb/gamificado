@@ -1,0 +1,36 @@
+<div class="menu-painel">
+    <nav>
+        <ul id="nav">
+            <?php if($this->auth->check() && $this->auth->tipo() == 1) { ?>
+                <li><a href="#">Painel Usuários</a>
+                    <ul>
+                        <li><a href="/user/create">Registrar Usuário</a></li>
+                        <li><a href="/user/listar">Listar Usuários</a></li>
+                    </ul>
+                </li>
+            <li><a href="#">Painel Publicação</a>
+                <ul></ul>
+            </li>
+            <?php } ?>
+            <li><a href="#">Painel Redação</a>
+                <ul>
+                    <?php if($this->auth->check() && $this->auth->tipo() == 1) { ?>
+                        <li><a href="/report/listar">Listar Reports</a></li>
+                    <?php } ?>
+                </ul>
+            </li>
+        </ul>
+    </nav>
+</div>
+<div class="user-data">
+    <div class="nome">Olá <?php $nome = explode(" ",$this->auth->nome()); echo $nome[0]; ?></div>
+    <div class="info">
+        <p>Seus pontos: <?php echo $this->auth->pontos(); ?></p>
+        <!--<p>Suas publicações:</p>
+        <p>Suas reports:</p>
+        <p>Seus Joinhas:</p>
+        <p>Seus Seus Ruinhas:</p>-->
+    </div>
+   <img class="avatar" src="/assets/img/user/<?php if(empty($this->auth->urlfoto()) || $this->auth->urlfoto() == 0) echo 'default.jpg'; else echo $this->auth->urlfoto();?>" alt="avatar">
+    <div class="nome"><a href="/user/<?php echo $this->auth->id()?>/edit">Editar Cadastro</a></div>
+</div>

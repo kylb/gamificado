@@ -1,10 +1,11 @@
 <?php
 namespace Core;
 trait Authenticate{
-    public function login(){
+
+    /*public function login(){
         $this->setPageTitle('Login');
         return $this->renderView('user/login','layout');
-    }
+    }*/
 
     public function auth($request){
         $result = $this->user->findWhere(['email' => $request->post->email]);

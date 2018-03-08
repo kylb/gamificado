@@ -36,6 +36,11 @@
             <p class="center"> E-mail não verificado</p>
         </div>
     <?php } ?>
+    <?php
+        if($this->auth->check() && !in_array( strtolower( $this->getPageTitle()), array('home','forum',''))){
+            require_once __DIR__ . '/painel.phtml';
+        }
+    ?>
     <main>
         <section class="content">
             <p><?php $this->content();?></p>
