@@ -58,8 +58,9 @@
 }
 
 footer {
-    position: absolute;
-    bottom: 0px;
+    display: block;
+    float: left;
+    margin: 20px;
     height: 60px;
 }
 

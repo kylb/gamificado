@@ -10,7 +10,6 @@ use Core\Validator;
 class ReportController extends BaseController {
 
     private $report;
-    protected $pdoLocal;
 
     public function __construct() {
         parent::__construct();
@@ -44,7 +43,7 @@ class ReportController extends BaseController {
                 'success' => ['Report created with success.']
             ]);
             return;
-        }catch(Exception $e){
+        }catch(\Exception $e){
             Redirect::route('/', [
                 'errors' => [$e->getMessage()]
             ]);

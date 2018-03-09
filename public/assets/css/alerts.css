@@ -44,11 +44,11 @@
     color: red;
 }
 
-input:invalid {
+.alert input:invalid {
     background-color: #ffdddd;
 }
 
-input:valid {
+.alert input:valid {
     background-color: #ddffdd;
 }
 

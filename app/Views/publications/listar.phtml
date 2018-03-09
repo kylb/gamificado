@@ -1,0 +1,36 @@
+<section class="painel">
+    <div class="caption"><?php echo $this->view->nome;?></div>
+    <div id="table">
+        <div class="header-row row">
+            <span class="cell">Tema</span>
+            <span class="cell">Título</span>
+            <span class="cell">Nº Essays</span>
+            <span class="cell">Conteúdo</span>
+            <span class="cell">Visível</span>
+            <span class="cell">Ação</span>
+        </div>
+        <?php foreach ($this->view->publication as $publication) { ?>
+            <div class="row">
+                <span class="cell" data-label="tema"><?php echo substr($publication->tema,0,25) . "..."; ?></span>
+                <span class="cell" data-label="titulo"><?php echo substr($publication->titulo,0,25) . "..."; ?></span>
+                <span class="cell" data-label="essays"><?php echo $publication->essays; ?></span>
+                <span class="cell" data-label="conteudo"><?php echo substr(strip_tags($publication->conteudo),0,25) . "..."; ?></span>
+                <span class="cell" data-label="visivel"><?php echo ($publication->visivel == 1) ?  'Sim' : 'Não'; ?></span>
+                <span class="cell" data-label="content">
+                    <button class="button">
+                        <a href="/publication/<?php echo $publication->id; ?>/detalhar"> <?php echo 'Detalhar' ?></a>
+                    </button>
+                    <button class="button button-green">
+                        <a href="/publication/<?php echo $publication->id; ?>/edit"> <?php echo 'Editar' ?></a>
+                    </button>
+                    <button class="button button-red disabled">
+                        <?php if($publication->essays == 0){ ?>
+                            <a href="/publication/<?php echo $publication->id; ?>/delete" onclick="return confirm('Tem certeza que deseja apagar?')"> <?php echo 'Apagar' ?></a>
+                        <?php } else {echo 'Disabled';} ?>
+                    </button>
+                </span>
+            </div>
+        <?php } ?>
+    </div>
+</section>
+

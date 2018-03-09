@@ -15,11 +15,11 @@
                 <span class="cell" data-label="reports"><?php echo $report->reports; ?></span>
                 <span class="cell" data-label="content"><?php echo substr($report->conteudo,0,25) . " (...)"; ?></span>
                 <span class="cell" data-label="content">
-                    <button class="button button-green">
+                    <button class="button">
                         <a href="/report/<?php echo $report->id; ?>/detalhar"> <?php echo 'Detalhar' ?></a>
                     </button>
                     <button class="button button-red">
-                        <a href="/report/<?php echo $report->id; ?>/delete" onclick="return confirm('Inativar esse Usuário?')"> <?php echo 'Apagar' ?></a>
+                        <a href="/report/<?php echo $report->id; ?>/delete" onclick="return confirm('Tem certeza que deseja apagar?')"> <?php echo 'Apagar' ?></a>
                     </button>
                 </span>
             </div>

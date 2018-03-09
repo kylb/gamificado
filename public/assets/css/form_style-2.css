@@ -2,23 +2,24 @@
 .form-style-2{
     min-width: 500px;
     padding: 20px 12px 10px 20px;
-    font: 13px Arial, Helvetica, sans-serif;
+    /*font: 14px Arial, Helvetica, sans-serif;;*/
 }
 .form-style-2-heading{
     font-weight: bold;
     font-style: italic;
     border-bottom: 2px solid #ddd;
     margin-bottom: 20px;
-    font-size: 15px;
+    font-size: 1.1em;
     padding-bottom: 3px;
 }
 .form-style-2 label{
     display: block;
-    margin: 0px 0px 15px 0px;
+    margin: 0px 0px 10px 0px;
 }
 .form-style-2 label > span{
     min-width: 15% ;
     font-weight: bold;
+    font-size: 0.9em;
     float: left;
     padding-top: 8px;
     padding-right: 5px;
@@ -27,13 +28,28 @@
 .form-style-2 span.required{
     color:red;
 }
-.form-style-2 .tel-number-field{
-    width: 40px;
-    text-align: center;
+
+.form-style-2 .item{
+    width: 100%;
+    display: block;
+    float: left;
 }
-.form-style-2 input.input-field, .form-style-2 .select-field, .textarea-field{
+.form-style-2 input.input-field, .textarea-field{
     width: 60%;
+    font-size: 0.8em;
 }
+.form-style-2 .select-field{
+    width: 10%;
+    font-size: 0.8em;
+}
+
+.checkeditor{
+    width: 60%;
+    display: block;
+    float: left;
+    margin-bottom: 10px;
+}
+
 .form-style-2 input.input-field,
 .form-style-2 .tel-number-field,
 .form-style-2 .textarea-field,
@@ -62,8 +78,10 @@
 }
 .form-style-2 input[type=submit], .form-style-2 input[type=button]{
     background: #161619;
-    padding: 8px 15px 8px 15px;
+    padding: 8px 20px;
     border: none;
+    font-weight: bold;
+    font-size: 1em;
     color: #fff;
 }
 .form-style-2 input[type=submit]:hover, .form-style-2 input[type=button]:hover{

@@ -133,7 +133,7 @@ class UserController extends BaseController {
                 'success' => ['User updated with success.']
             ]);
             return;
-        }catch(Exception $e){
+        }catch(\Exception $e){
             Redirect::route('/', [
                 'errors' => [$e->getMessage()]
             ]);
