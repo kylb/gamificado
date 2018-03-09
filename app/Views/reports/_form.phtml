@@ -1,0 +1,27 @@
+<section class="painel">
+    <div class="form-style-2">
+        <form action="/report/store" method="post" enctype="multipart/form-data">
+            <input hidden type="text" name="id_essay" value ="<?php echo $this->view->essay->id; ?>" class="input-field" />
+            <input hidden type="text" name="id_user" value ="<?php echo $this->auth->id(); ?>" class="input-field" />
+            <label for="tema-publication"><span>Tema Publicação</span>
+                <input readonly type="text" name="tema-publication" value ="<?php echo $this->view->essay->publication->tema; ?>" class="input-field" />
+            </label>
+            <label for="titulo-publication"><span>Titulo Publicação</span>
+                <input readonly type="text" name="titulo-publication" value ="<?php echo $this->view->essay->publication->titulo; ?>" class="input-field" />
+            </label>
+            <label for="autor-essay"><span>Autor Redação</span>
+                <input readonly type="text" name="autor-essay" value ="<?php echo $this->view->essay->user->nome; ?>" class="input-field" />
+            </label>
+            <label for="titulo-essay"><span>Titulo Redação</span>
+                <input readonly type="text" name="titulo-essay" value ="<?php echo $this->view->essay->titulo; ?>" class="input-field" />
+            </label>
+            <label for="conteudo"><span>O que há de errado?</span>
+                <textarea name="conteudo" id="conteudo" class="textarea-field"><?php echo $this->view->reports->conteudo; ?></textarea>
+            </label>
+            <label for=""><span>&nbsp;</span>
+                <input type="submit" value="Reportar" />
+            </label>
+        </form>
+    </div>
+</section>
+

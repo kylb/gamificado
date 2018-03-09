@@ -1,6 +1,7 @@
 <?php
 namespace App\Controllers;
 
+use App\Models\EssayBaseModel;
 use App\Models\ReportBaseModel;
 use Core\BaseController;
 use Core\Redirect;
@@ -9,15 +10,18 @@ use Core\Validator;
 class ReportController extends BaseController {
 
     private $report;
+    protected $pdoLocal;
 
     public function __construct() {
         parent::__construct();
-        $this->report = new ReportBaseModel();
+        $this->report = new ReportBaseModel;
     }
 
-    public function create(){
+    public function create($id){
         $this->view->nome = "Reports";
         $this->view->acao = 'create';
+        $essay = new EssayBaseModel($this->report->getPdo());
+        $this->view->essay = $essay->find($id);
         $this->setPageTitle($this->view->nome);
         $this->renderView("reports/_form","layout");
     }
@@ -30,7 +34,7 @@ class ReportController extends BaseController {
         ];
 
         if(Validator::make($data,$this->report->rulesCreate(),$this->report)){
-            Redirect::route("/report/create", "layout");
+            Redirect::route("/painel", "layout");
             return;
         }
 

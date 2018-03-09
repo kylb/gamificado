@@ -12,11 +12,13 @@ $route[] = ['/logout'               ,'UserController@logout'        ,'auth'];
 
 $route[] = ['/user/create'          ,'UserController@create'];
 $route[] = ['/user/store'           ,'UserController@store'];
+$route[] = ['/user/listar'          ,'UserController@listar'        ,'auth'];
 $route[] = ['/user/{id}/edit'       ,'UserController@edit'          ,'auth'];
 $route[] = ['/user/update'          ,'UserController@update'        ,'auth'];
 $route[] = ['/user/{id}/delete'     ,'UserController@delete'        ,'auth'];
-$route[] = ['/user/listar'          ,'UserController@listar'        ,'auth'];
 
+$route[] = ['/report/{id}/create'   ,'ReportController@create'      ,'auth'];
+$route[] = ['/report/store'         ,'ReportController@store'       ,'auth'];
 $route[] = ['/report/listar'        ,'ReportController@listar'      ,'auth'];
 $route[] = ['/report/{id}/detalhar' ,'ReportController@detalhar'    ,'auth'];
 $route[] = ['/report/{id}/delete'   ,'ReportController@delete'      ,'auth'];

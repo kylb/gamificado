@@ -13,9 +13,9 @@ class ReportBaseModel extends BaseModel {
 
     public function All(){
         $result = parent::All();
-        $essay = new EssayBaseModel($this->pdo);
-        $user  = new UserBaseModel($this->pdo);
-        $reports = new ReportBaseModel($this->pdo);
+        $essay = new EssayBaseModel($this->getPdo());
+        $user  = new UserBaseModel($this->getPdo());
+        $reports = new ReportBaseModel($this->getPdo());
         foreach ($result as $key => $value){
             $result[$key]->essay = $essay->find($value->id_essay);
             $result[$key]->user  = $user->find($value->id_user);
@@ -26,8 +26,8 @@ class ReportBaseModel extends BaseModel {
 
     public function find($id){
         $result = parent::find($id);
-        $essay = new EssayBaseModel($this->pdo);
-        $user  = new UserBaseModel($this->pdo);
+        $essay = new EssayBaseModel($this->getPdo());
+        $user  = new UserBaseModel($this->getPdo());
         $result->essay = $essay->find($result->id_essay);
         $result->user  = $user->find($result->id_user);
         return $result;

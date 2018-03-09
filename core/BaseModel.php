@@ -5,8 +5,8 @@ abstract class BaseModel{
     protected $table;
 
     public function __construct(){
-        $pdo = func_get_arg(0);
-        if($pdo){
+        if(func_num_args() > 0){
+            $pdo = func_get_arg(0);
             $this->pdo = $pdo;
         } else{
             $this->pdo = DataBase::getDatabase();
@@ -176,6 +176,14 @@ abstract class BaseModel{
         $result = $stmt->execute();
         $stmt->closeCursor();
         return $result;
+    }
+
+    public function getPdo(){
+        return $this->pdo;
+    }
+
+    public function getLastInsertId(){
+        return $this->pdo->lastInsertId();
     }
 }
 

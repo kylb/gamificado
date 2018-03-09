@@ -1,7 +1,25 @@
-    <section class="painel">
-        <?php
-        var_dump($this->view->reports);
-        echo "<br />";
-        ?>
-    </section>
+<section class="painel">
+    <div class="form-style-2">
+        <form action="/report/<?php echo $this->view->reports->id;?>/delete" method="post" enctype="multipart/form-data">
+            <label for="tema-publication"><span>Tema Publicação</span>
+                <input readonly type="text" name="tema-publication" value ="<?php echo $this->view->reports->essay->publication->tema; ?>" class="input-field" />
+            </label>
+            <label for="titulo-publication"><span>Titulo Publicação</span>
+                <input readonly type="text" name="titulo-publication" value ="<?php echo $this->view->reports->essay->publication->titulo; ?>" class="input-field" />
+            </label>
+            <label for=autor-publication"><span>Autor Publicação</span>
+                <input readonly type="text" name="autor-publication" value ="<?php echo $this->view->reports->essay->publication->user->nome; ?>" class="input-field" />
+            </label>
+            <label for="titulo-essay"><span>Titulo Redação</span>
+                <input readonly type="text" name="titulo-essay" value ="<?php echo $this->view->reports->essay->titulo; ?>" class="input-field" />
+            </label>
+            <label for="conteudo"><span>O que há de errado?</span>
+            <textarea name="conteudo" id="conteudo" class="textarea-field"><?php echo $this->view->reports->conteudo; ?></textarea>
+            </label>
+            <label><span>&nbsp;</span>
+                <input type="submit" value="Apagar" />
+            </label>
+        </form>
+    </div>
+</section>
 
