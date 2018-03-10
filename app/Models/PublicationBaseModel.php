@@ -22,8 +22,8 @@ class PublicationBaseModel extends BaseModel {
         ];
     }
 
-    public function All(){
-        $result = parent::All();
+    public function findWhereAll(array $conditions){
+        $result = parent::findWhereAll($conditions);
         $user  = new UserBaseModel($this->getPdo());
         $essay = new EssayBaseModel($this->getPdo());
         $reference = new ReferenceBaseModel($this->getPdo());
