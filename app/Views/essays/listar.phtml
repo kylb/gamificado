@@ -1,0 +1,74 @@
+<section class="painel">
+    <div class="caption"><?php echo $this->view->nome; ?></div>
+    <div id="table">
+        <div class="header-row row">
+            <span class="cell">Título</span>
+            <span class="cell">Posição</span>
+            <span class="cell">#Reports</span>
+            <span class="cell">#Likes</span>
+            <span class="cell">#Dislikes</span>
+            <span class="cell">Pontos</span>
+            <span class="cell">#EssaysContra</span>
+            <span class="cell">Coteúdo</span>
+            <span class="cell">Ação</span>
+        </div>
+        <?php foreach ($this->view->essay as $essay) { ?>
+            <div class="row">
+                <span class="cell" data-label="titulo">
+                    <?php echo substr($essay->titulo, 0, 25) . "..."; ?>
+                </span>
+                <span class="cell" data-label="posicao">
+                    <?php if ($essay->posicao == 1) {
+                        echo 'Favor';
+                    } else if ($essay->posicao == -1) {
+                        echo 'Contra';
+                    } else {
+                        echo 'Neutra';
+                    } ?>
+                </span>
+                <span class="cell" data-label="reports">
+                    <?php echo count($essay->report); ?>
+                </span>
+                <?php
+                $likes = 0;
+                $dislikes = 0;
+                foreach ($essay->essayAvaliation as $key=>$value){
+                    if($key == 'avaliacao' && $value == 1){
+                        $likes++;
+                    } else {
+                        $dislikes++;
+                    }
+                }
+                $pontos = $likes - $dislikes;
+                ?>
+                <span class="cell" data-label="likes"><?php echo $dislikes;?></span>
+                <span class="cell" data-label="dislikes"><?php echo $dislikes;?></span>
+                <span class="cell" data-label="pontos"><?php echo $pontos;?></span>
+                <span class="cell" data-label="essayscontra">
+                    <?php echo count($essay->essayOposition) ?>
+                </span>
+                <span class="cell" data-label="votes">
+                    <?php echo substr(strip_tags($essay->conteudo), 0, 25) . "..."; ?>
+                </span>
+                <span class="cell" data-label="acao">
+
+                    <button class="button">
+                        <a href="/essay/<?php echo $essay->id; ?>/detalhar"> <?php echo 'Detalhar' ?></a>
+                    </button>
+                    <button class="button button-green">
+                        <a href="/essay/<?php echo $essay->id; ?>/edit"> <?php echo 'Editar' ?></a>
+                    </button>
+                    <button class="button button-red disabled">
+                        <?php if ((count($essay->essayOposition) + $likes + $dislikes) == 0) { ?>
+                            <a href="/essay/<?php echo $essay->id; ?>/delete"
+                               onclick="return confirm('Tem certeza que deseja apagar?')"> <?php echo 'Apagar' ?></a>
+                        <?php } else {
+                            echo 'Disabled';
+                        } ?>
+                    </button>
+                </span>
+            </div>
+        <?php } ?>
+    </div>
+</section>
+
