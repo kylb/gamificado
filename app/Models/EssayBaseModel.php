@@ -5,8 +5,8 @@ use Core\BaseModel;
 class EssayBaseModel extends BaseModel {
     protected $table = 'essays';
 
-    public function All(){
-        $result          = parent::All();
+    public function findWhereAll(array $conditions){
+        $result          = parent::findWhereAll($conditions);
         $user            = new UserBaseModel($this->getPdo());
         $publication     = new PublicationBaseModel($this->getPdo());
         $essayLink       = new EssayLinkBaseModel($this->getPdo());

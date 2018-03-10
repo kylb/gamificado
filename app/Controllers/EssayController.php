@@ -65,7 +65,7 @@ class EssayController extends BaseController{
     public function listar(){
         $this->view->nome = "Lista essays";
         $this->view->acao = 'listar';
-        $this->view->essay = $this->essay->All();
+        $this->view->essay = $this->essay->findWhereAll(['id_user' => $this->auth->id()]);
         $this->setPageTitle("{$this->view->nome}");
         $this->renderView("essays/listar","layout");
     }

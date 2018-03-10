@@ -66,7 +66,7 @@ class PublicationController extends BaseController{
     public function listar(){
         $this->view->nome = "Lista Publications";
         $this->view->acao = 'listar';
-        $this->view->publication = $this->publication->All();
+        $this->view->publication = $this->publication->findWhereAll(['id_user' => $this->auth->id()]);
         $this->setPageTitle("{$this->view->nome}");
         $this->renderView("publications/listar","layout");
     }
