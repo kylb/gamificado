@@ -13,7 +13,7 @@
             <div class="row">
                 <span class="cell" data-label="tema"><?php echo substr($publication->tema,0,25) . "..."; ?></span>
                 <span class="cell" data-label="titulo"><?php echo substr($publication->titulo,0,25) . "..."; ?></span>
-                <span class="cell" data-label="essays"><?php echo $publication->essays; ?></span>
+                <span class="cell" data-label="essays"><?php echo count($publication->essay); ?></span>
                 <span class="cell" data-label="conteudo"><?php echo substr(strip_tags($publication->conteudo),0,25) . "..."; ?></span>
                 <span class="cell" data-label="visivel"><?php echo ($publication->visivel == 1) ?  'Sim' : 'Não'; ?></span>
                 <span class="cell" data-label="content">
