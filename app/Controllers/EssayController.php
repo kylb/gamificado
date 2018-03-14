@@ -20,7 +20,7 @@ class EssayController extends BaseController{
         $this->view->nome = "Criar essays";
         $this->view->acao = 'create';
         $publication = new PublicationBaseModel($this->essay->getPdo());
-        $this->view->publication = $publication->find($id);
+        $this->view->essay->publication = $publication->find($id);
         if(!$this->auth->check()){
             Redirect::route('/painel', ['errors' => ['Ahaaa! Você não pode fazer isso.']]);
             return;

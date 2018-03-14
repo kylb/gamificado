@@ -17,7 +17,7 @@ class ForumController extends BaseController{
 
     public function forum(){
         $this->view->nome = "Forum";
-        $this->view->acao = 'forum';
+        $this->view->acao = 'index';
         $this->view->publication = $this->publication->findWhereAll(['visivel' => 1]);
         $this->setPageTitle("{$this->view->nome}");
         $this->renderView("forum/listar","layout");
