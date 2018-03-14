@@ -46,10 +46,10 @@
                 } else {?>
                     <div class="item">
                         <label for=""><span>Posicionamento</span>
-                            <select class="select-field" name="visivel" <?php echo ($acao == 'detalhar') ? 'disabled' : ''?>>
-                                <option value="0" <?php echo ($this->view->essay->publication->visivel == 0) ? 'selected' : ' ' ?>>Neutro</option>
-                                <option value="1" <?php echo ($this->view->essay->publication->visivel == 1) ? 'selected' : ' ' ?>>Favor</option>
-                                <option value="-1" <?php echo ($this->view->essay->publication->visivel == -1) ? 'selected' : ' ' ?>>Contra</option>
+                            <select class="select-field" name="posicao" <?php echo ($acao == 'detalhar') ? 'disabled' : ''?>>
+                                <option value="0" <?php echo ($this->view->essay->posicao == 0) ? 'selected' : ' ' ?>>Neutro</option>
+                                <option value="1" <?php echo ($this->view->essay->posicao == 1) ? 'selected' : ' ' ?>>Favor</option>
+                                <option value="-1" <?php echo ($this->view->essay->posicao == -1) ? 'selected' : ' ' ?>>Contra</option>
                             </select>
                         </label>
                     </div>

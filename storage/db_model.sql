@@ -130,7 +130,7 @@ CREATE TABLE IF NOT EXISTS `forumufba`.`reports` (
   CONSTRAINT `fk_reports_1`
     FOREIGN KEY (`id_essay`)
     REFERENCES `forumufba`.`essays` (`id`)
-    ON DELETE NO ACTION
+    ON DELETE CASCADE
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_reports_2`
     FOREIGN KEY (`id_user`)

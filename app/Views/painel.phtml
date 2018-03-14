@@ -2,28 +2,24 @@
     <nav>
         <ul id="nav">
             <?php if($this->auth->check() && $this->auth->tipo() == 1) { ?>
-                <li><a href="#">Painel Usuários</a>
+                <li><a href="">User Panel</a>
                     <ul>
-                        <li><a href="/user/create">Registrar Usuário</a></li>
-                        <li><a href="/user/listar">Listar Usuários</a></li>
+                        <li><a href="/user/create">Register User</a></li>
+                        <li><a href="/user/listar">List Users</a></li>
                     </ul>
                 </li>
-            <li><a href="#">Painel Publicação</a>
+            <li><a href="">Publication Panel</a>
                 <ul>
-                    <li><a href="/publication/create">Criar Publicações</a></li>
-                    <li><a href="/publication/listar">Listar Publicações</a></li>
+                    <li><a href="/publication/create">Create Publication</a></li>
+                    <li><a href="/publication/listar">List Publications</a></li>
                 </ul>
             </li>
-            <?php } ?>
-            <li><a href="#">Painel Redação</a>
-                <ul>
-                    <li><a href="/essay/create">Criar Redação</a></li>
-                    <li><a href="/essay/listar">Listar Redações</a></li>
-                    <?php if($this->auth->check() && $this->auth->tipo() == 1) { ?>
-                        <li><a href="/report/listar">Listar Reports</a></li>
-                    <?php } ?>
-                </ul>
-            </li>
+            <li><a href="/essay/listar">My Essays</a></li>
+            <li><a href="/report/listar">Reports</a></li>
+            <?php } else { ?>
+                <li><a href="/essay/listar">My Essays</a></li>
+            <?php }?>
+
         </ul>
     </nav>
 </div>
