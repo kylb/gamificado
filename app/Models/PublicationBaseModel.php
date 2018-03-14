@@ -8,17 +8,15 @@ class PublicationBaseModel extends BaseModel {
 
     public function rulesCreate(){
         return [
-            'tema' => 'max:100|min:4',
-            'titulo' => 'max:100|min:4',
-            'data' => 'date'
+            'tema' => 'max:255|min:4',
+            'titulo' => 'max:255|min:4'
         ];
     }
 
     public function rulesUpdate($id){
         return [
-            'tema' => 'max:100|min:4',
-            'titulo' => 'max:100|min:4',
-            'data' => 'date'
+            'tema' => 'max:255|min:4',
+            'titulo' => 'max:255|min:4'
         ];
     }
 

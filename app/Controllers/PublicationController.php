@@ -138,7 +138,7 @@ class PublicationController extends BaseController{
                     $reference->create(['origem' => $value, 'id_publication' => $id]);
                 }
             }
-            Redirect::route('/publication/listar', ['success' => ['User updated with success.']]);
+            Redirect::route('/publication/listar', ['success' => ['Publication updated with success.']]);
             return;
         }catch(\Exception $e){
             Redirect::route('/painel', ['errors' => [$e->getMessage()]]);

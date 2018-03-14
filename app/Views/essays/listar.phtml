@@ -9,7 +9,6 @@
             <span class="cell">#Dislikes</span>
             <span class="cell">Pontos</span>
             <span class="cell">#EssaysContra</span>
-            <span class="cell">Coteúdo</span>
             <span class="cell">Ação</span>
         </div>
         <?php foreach ($this->view->essay as $essay) { ?>
@@ -47,9 +46,9 @@
                 <span class="cell" data-label="essayscontra">
                     <?php echo count($essay->essayOposition) ?>
                 </span>
-                <span class="cell" data-label="votes">
-                    <?php echo substr(strip_tags($essay->conteudo), 0, 25) . "..."; ?>
-                </span>
+                <!--<span class="cell" data-label="votes">
+                    <?php /*echo substr(strip_tags($essay->conteudo), 0, 25) . "..."; */?>
+                </span>-->
                 <span class="cell" data-label="acao">
 
                     <button class="button">
@@ -66,9 +65,15 @@
                             echo 'Disabled';
                         } ?>
                     </button>
+                    <button class="button" value="1" id="like<?php echo $essay->id; ?>" onclick="fnLike(<?php echo $essay->id; ?>)">
+                        <?php echo ($essay->userAvaliation == 1) ? 'Liked' : 'Like';?>
+                    </button>
+                    <button class="button" value="-1" id="dislike<?php echo $essay->id; ?>" onclick="fnDislike(<?php echo $essay->id; ?>)">
+                        <?php echo ($essay->userAvaliation == -1) ? 'Disliked' : 'Dislike';?>
+                    </button>
                 </span>
             </div>
         <?php } ?>
     </div>
-</section>
 
+</section>

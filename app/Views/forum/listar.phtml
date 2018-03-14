@@ -1,0 +1,26 @@
+<section class="painel">
+    <div class="caption"><?php echo $this->view->nome;?></div>
+    <div id="table">
+        <div class="header-row row">
+            <span class="cell">Tema</span>
+            <span class="cell">Título</span>
+            <span class="cell">Nº Essays</span>
+            <span class="cell">Ação</span>
+        </div>
+        <?php foreach ($this->view->publication as $publication) { ?>
+            <div class="row">
+                <span class="cell" data-label="tema"><?php echo substr($publication->tema,0,25) . "..."; ?></span>
+                <span class="cell" data-label="titulo"><?php echo substr($publication->titulo,0,25) . "..."; ?></span>
+                <span class="cell" data-label="essays"><?php echo count($publication->essay); ?></span>
+                <span class="cell" data-label="content">
+                    <button class="button">
+                        <a href="/forum/<?php echo $publication->id; ?>/detalhar"> <?php echo 'Detalhar' ?></a>
+                    </button>
+                    <button class="button button-green">
+                        <a href="/essay/<?php echo $publication->id; ?>/create"> <?php echo 'Comentar' ?></a>
+                    </button>
+                </span>
+            </div>
+        <?php } ?>
+    </div>
+</section>

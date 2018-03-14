@@ -1,0 +1,92 @@
+<?php $acao = $this->view->acao;?>
+<section class="painel">
+    <div class="form-style-2">
+        <div class="form-style-2-heading"><label><span>&nbsp;</span><?php echo $this->view->nome?></label></div>
+        <form action="/publication/<?php echo ($acao == 'edit') ? 'update' : 'store' ?>" method="post" enctype="multipart/form-data">
+            <?php if($acao == 'edit'){ ?>
+                <input hidden type="text" name="id" value ="<?php echo $this->view->publication->id; ?>" class="input-field" />
+            <?php } ?>
+            <div class="item">
+                <label for="tema"><span>Tema</span>
+                    <input <?php if($acao == 'detalhar') echo 'readonly'; ?> type="text" name="tema" value ="<?php echo $this->view->publication->tema; ?>" class="input-field" />
+                </label>
+            </div>
+
+            <div class="item">
+                <label for="titulo"><span>Titulo</span>
+                    <input <?php if($acao == 'detalhar') echo 'readonly'; ?> type="text" name="titulo" value ="<?php echo $this->view->publication->titulo; ?>" class="input-field" />
+                </label>
+            </div class="item">
+
+            <?php if($acao == 'detalhar') { ?>
+                <div>
+                    <label for="autor"><span>Autor Redação</span>
+                        <input  readonly type="text" name="autor" value ="<?php echo $this->view->publication->user->nome; ?>" class="input-field" />
+                    </label>
+                </div>
+            <?php }?>
+
+            <?php
+            if(!in_array($acao, array('edit','detalhar'))) { ?>
+                <div class="item">
+                    <label for=""><span>Publicar</span>
+                        <select class="select-field" name="visivel">
+                            <option value="1" selected>Sim</option>
+                            <option value="0">Não</option>
+                        </select>
+                    </label>
+                </div>
+                <?php
+            } else {?>
+                <div class="item">
+                    <label for=""><span>Publicar</span>
+                        <select class="select-field" name="visivel" <?php echo ($acao == 'detalhar') ? 'disabled' : ''?>>
+                            <option value="1" <?php echo ($this->view->publication->visivel == 1) ? 'selected' : ' ' ?>>Sim</option>
+                            <option value="0" <?php echo ($this->view->publication->visivel == 0) ? 'selected' : ' ' ?>>Não</option>
+                        </select>
+                    </label>
+                </div>
+                <?php
+            }?>
+
+            <div class="item">
+                <label for="conteudo"><span>Publicação</span></label>
+                <div class="checkeditor">
+                    <textarea name="conteudo"><?php echo $this->view->publication->conteudo; ?></textarea>
+                </div>
+            </div>
+
+            <div class="form-style-2-heading"><label><span>&nbsp;</span>References</label></div>
+
+            <?php if(in_array($acao, array('edit','detalhar'))) {
+                foreach ($this->view->publication->reference as $references) { ?>
+                    <div class="item">
+                        <label for=""><span>&nbsp;</span>
+                            <input  type="text" name="origem[<?php echo $references->id; ?>]" value="<?php echo $references->origem; ?>" class="input-field" <?php if ($acao == 'detalhar') echo 'readonly'; ?> />
+                        </label>
+                    </div>
+                    <?php
+                }
+            } else {
+                for($i = 0; $i < 5; $i++){ ?>
+                    <div class="item">
+                        <label for=""><span>&nbsp;</span><input type="text" name="origem[]" class="input-field" /></label>
+                    </div>
+                    <?php
+                }
+            }
+            ?>
+            <?php if(in_array($acao, array('edit','create'))) { ?>
+                <div class="item">
+                    <label for=""><span>&nbsp</span>
+                        <input type="submit" value="<?php echo ($acao == 'edit') ? 'Editar' : 'Criar'?>" />
+                    </label>
+                </div>
+            <?php }?>
+
+        </form>
+    </div>
+    <script>
+        CKEDITOR.replace( 'conteudo' );
+    </script>
+</section>

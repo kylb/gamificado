@@ -1,9 +1,24 @@
 <?php
 namespace App\Models;
+use Core\Auth;
 use Core\BaseModel;
 
 class EssayBaseModel extends BaseModel {
     protected $table = 'essays';
+
+    public function rulesCreate(){
+        return [
+            'titulo' => 'max:255|min:4',
+            'conteudo' => 'min:4'
+        ];
+    }
+
+    public function rulesUpdate($id){
+        return [
+            'titulo' => 'max:255|min:4',
+            'conteudo' => 'min:4'
+        ];
+    }
 
     public function findWhereAll(array $conditions){
         $result          = parent::findWhereAll($conditions);
@@ -18,6 +33,7 @@ class EssayBaseModel extends BaseModel {
             $result[$key]->publication               = $publication->find($value->id_publication);
             $result[$key]->essayLink                 = $essayLink->findWhereAll(['id_essay' => $value->id]);
             $result[$key]->essayAvaliation           = $essayAvaliation->findWhereAll(['id_essay' => $value->id]);
+            $result[$key]->userAvaliation            = $essayAvaliation->findWhere(['id_essay' => $value->id, 'id_user' => Auth::id()])->avaliacao;
             $result[$key]->essayOposition            = $essayOposition->findWhereAll(['id_essay' => $value->id]);
             $result[$key]->report                    = $report->findWhereAll(['id_essay' => $value->id]);
         }
@@ -37,6 +53,7 @@ class EssayBaseModel extends BaseModel {
         $result->publication               = $publication->find($value->id_publication);
         $result->essayLink                 = $essayLink->findWhereAll(['id_essay' => $value->id]);
         $result->essayAvaliation           = $essayAvaliation->findWhereAll(['id_essay' => $value->id]);
+        $result->userAvaliation            = $essayAvaliation->findWhere(['id_essay' => $value->id, 'id_user' => Auth::id()])->avaliacao;
         $result->essayOposition            = $essayOposition->findWhereAll(['id_essay' => $value->id]);
         $result->report                    = $report->findWhereAll(['id_essay' => $value->id]);
         return $result;
