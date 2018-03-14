@@ -11,7 +11,7 @@
             <li><a href="">Publication Panel</a>
                 <ul>
                     <li><a href="/publication/create">Create Publication</a></li>
-                    <li><a href="/publication/listar">List Publications</a></li>
+                    <li><a href="/publication/listar">My Publications</a></li>
                 </ul>
             </li>
             <li><a href="/essay/listar">My Essays</a></li>
@@ -26,11 +26,14 @@
 <div class="user-data">
     <div class="nome">Olá <?php $nome = explode(" ",$this->auth->nome()); echo $nome[0]; ?></div>
     <div class="info">
-        <p>Seus pontos: <?php echo $this->auth->pontos(); ?></p>
-        <!--<p>Suas publicações:</p>
-        <p>Suas reports:</p>
-        <p>Seus Joinhas:</p>
-        <p>Seus Seus Ruinhas:</p>-->
+        <p>Points: <?php echo $_SESSION['status']['pontos'] ?></p>
+            <?php if($this->auth->tipo() == 1) { ?>
+                <p>Publications: <?php echo $_SESSION['status']['publications'] ?></p>
+            <?php } ?>
+        <p>Essays: <?php echo $_SESSION['status']['essays'] ?></p>
+        <p>Reports: <?php echo $_SESSION['status']['reports'] ?></p>
+        <p>Votes: <?php echo $_SESSION['status']['essayAvaliations'] ?></p>
+
     </div>
    <img class="avatar" src="/assets/img/user/<?php if(empty($this->auth->urlfoto()) || $this->auth->urlfoto() == 0) echo 'default.jpg'; else echo $this->auth->urlfoto();?>" alt="avatar">
     <div class="nome"><a href="/user/<?php echo $this->auth->id()?>/edit">Editar Cadastro</a></div>

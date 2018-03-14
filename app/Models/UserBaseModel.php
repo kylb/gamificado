@@ -23,8 +23,4 @@ class UserBaseModel extends BaseModel{
             'dtnasc' => 'date'
         ];
     }
-
-    /*public function post(){
-        return $this->hasMany(Post::class);
-    }*/
 }

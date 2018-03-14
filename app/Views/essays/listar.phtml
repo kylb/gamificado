@@ -31,8 +31,8 @@
                 <?php
                 $likes = 0;
                 $dislikes = 0;
-                foreach ($essay->essayAvaliation as $key=>$value){
-                    if($key == 'avaliacao' && $value == 1){
+                foreach ($essay->essayAvaliation as $key){
+                    if($key->avaliacao == 1){
                         $likes++;
                     } else {
                         $dislikes++;
@@ -40,7 +40,7 @@
                 }
                 $pontos = $likes - $dislikes;
                 ?>
-                <span class="cell" data-label="likes"><?php echo $dislikes;?></span>
+                <span class="cell" data-label="likes"><?php echo $likes;?></span>
                 <span class="cell" data-label="dislikes"><?php echo $dislikes;?></span>
                 <span class="cell" data-label="pontos"><?php echo $pontos;?></span>
                 <span class="cell" data-label="essayscontra">

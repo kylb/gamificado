@@ -11,6 +11,11 @@ class Auth{
     private static $tipo = null;
     private static $verificado = null;
 
+/*    private static $publications = null;
+    private static $essays = null;
+    private static $reports = null;
+    private static $votes = null;*/
+
     public function __construct(){
         if(Session::get('user')){
             $user = Session::get('user');
@@ -23,6 +28,11 @@ class Auth{
             self::$pontos     = $user['pontos'];
             self::$tipo       = $user['tipo'];
             self::$verificado = $user['verificado'];
+
+            /*self::$publications = $user['publications'];
+            self::$essays       = $user['essays'];
+            self::$reports      = $user['reports'];
+            self::$votes        = $user['reports'];*/
         }
     }
     public static function id(){
@@ -52,6 +62,20 @@ class Auth{
     public static function verificado(){
         return self::$verificado;
     }
+    /*public static function publications(){
+        return self::$publications;
+    }
+    public static function essays(){
+        return self::$essays;
+    }
+    public static function reports(){
+        return self::$reports;
+    }
+    public static function votes(){
+        return self::$votes;
+    }*/
+
+
 
     public static function check(){
         if(self::$id == null || self::$nome == null || self::$email == null)

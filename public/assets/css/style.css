@@ -39,6 +39,7 @@
 
 .user-data .info {
     display: inline-block;
+    font-size: 0.9em;
 }
 .container {
     margin: 1em auto;
