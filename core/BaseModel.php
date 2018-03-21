@@ -45,7 +45,7 @@ abstract class BaseModel{
 
     public function create(array $data){
         $data = $this->prepareDataInsert($data);
-        $query = "INSERT INTO {$this->table} ({$data[0]}) VALUES ({$data[1]})";
+        $query = "INSERT INTO `{$this->table}` ({$data[0]}) VALUES ({$data[1]})";
         $stmt = $this->pdo->prepare($query);
         for($i = 0; $i < count($data[2]); $i++){
             $stmt->bindValue("{$data[2][$i]}","{$data[3][$i]}");
@@ -74,7 +74,7 @@ abstract class BaseModel{
 
     public function update(array $data, $id) {
         $data = $this->prepareDataUpdate($data);
-        $query = "UPDATE {$this->table} SET {$data[0]}  WHERE id=:id";
+        $query = "UPDATE `{$this->table}` SET {$data[0]}  WHERE id=:id";
         $stmt = $this->pdo->prepare($query);
         $stmt->bindValue(":id", $id);
         for($i = 0; $i < count($data[1]); $i++){
@@ -86,7 +86,7 @@ abstract class BaseModel{
     }
 
     public function delete($id){
-        $query = "DELETE FROM {$this->table} WHERE id=:id";
+        $query = "DELETE FROM `{$this->table}` WHERE id=:id";
         $stmt = $this->pdo->prepare($query);
         $stmt->bindValue(":id", $id);
         $result = $stmt->execute();
@@ -126,7 +126,7 @@ abstract class BaseModel{
 
     public function findWhere(array $conditions){
         $where = $this->prepareWhere($conditions);
-        $query = "SELECT * FROM {$this->table} WHERE 1 = 1 {$where[0]}";
+        $query = "SELECT * FROM `{$this->table}` WHERE 1 = 1 {$where[0]}";
         $stmt = $this->pdo->prepare($query);
         for($i = 0; $i < count($where[1]); $i++){
             $stmt->bindValue("{$where[1][$i]}","{$where[2][$i]}");
@@ -139,7 +139,7 @@ abstract class BaseModel{
 
     public function findWhereAll(array $conditions){
         $where = $this->prepareWhere($conditions);
-        $query = "SELECT * FROM {$this->table} WHERE 1 = 1 {$where[0]}";
+        $query = "SELECT * FROM `{$this->table}` WHERE 1 = 1 {$where[0]}";
         $stmt = $this->pdo->prepare($query);
         for($i = 0; $i < count($where[1]); $i++){
             $stmt->bindValue("{$where[1][$i]}","{$where[2][$i]}");
@@ -168,7 +168,7 @@ abstract class BaseModel{
 
     public function deleteWhere (array $conditions){
         $where = $this->prepareWhere($conditions);
-        $query = "DELETE FROM {$this->table} WHERE 1 = 1 {$where[0]}";
+        $query = "DELETE FROM `{$this->table}` WHERE 1 = 1 {$where[0]}";
         $stmt = $this->pdo->prepare($query);
         for($i = 0; $i < count($where[1]); $i++){
             $stmt->bindValue("{$where[1][$i]}","{$where[2][$i]}");
@@ -186,4 +186,3 @@ abstract class BaseModel{
         return $this->pdo->lastInsertId();
     }
 }
-

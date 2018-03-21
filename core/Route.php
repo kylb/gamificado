@@ -18,7 +18,7 @@ class Route{
     private function setRoutes($routes){
         foreach ($routes as $route){
             $explode = explode('@',$route[1]);
-            if($route[2]){
+            if(isset($route[2])){
                 $r = [$route[0],$explode[0],$explode[1],$route[2]];
             }else{
                 $r = [$route[0],$explode[0],$explode[1]];
@@ -61,12 +61,12 @@ class Route{
                 }
                 $route[0] = implode($routeArray,'/');
             }
-            if($url == $route[0] ){
+            if($url == $route[0]){
                 $found = true;
                 $controller = $route[1];
                 $action = $route[2];
                 $auth = new Auth;
-                if($route[3] == 'auth' && !$auth::check()){
+                if(isset($route[3]) && $route[3] == 'auth' && !$auth::check()){
                     $action = 'forbiden';
                 }
                 break;
@@ -86,4 +86,3 @@ class Route{
         }
     }
 }
-
