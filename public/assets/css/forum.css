@@ -1,0 +1,219 @@
+.forum {
+    display: block;
+    text-align: center;
+    width: 100%;
+}
+
+.forum #table{
+    display: table;
+    width: 100%;
+    background: #fff;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+.forum .caption {
+    display: block;
+    width: 100%;
+    background: black;
+    text-align: center;
+    height: 55px;
+    padding-left: 10px;
+    color: white;
+    font-size: 20px;
+    line-height: 55px;
+    text-shadow: 1px 1px 1px rgba(0,0,0,.3);
+    box-sizing: border-box;
+}
+
+.forum .header-row {
+    background: #8b8b8b;
+    color: #fff;
+}
+
+.forum .row {
+    display: table-row;
+}
+.forum a{
+    text-decoration: none;
+    color: #000;
+}
+
+.forum a:hover{
+    text-decoration: underline;
+}
+
+.forum .row .primary {
+    text-align: left; !important;
+    width: 80%;
+}
+
+.forum .row .titulo{
+    font-size: 1em;
+    font-weight: bold;
+}
+
+.forum .row .extra{
+    font-size: 0.8em;
+}
+.forum .row .autor{
+    font-size: 0.8em;
+    font-weight: bold;
+}
+
+.forum .cell {
+    display: table-cell;
+    padding: 6px;
+    border-bottom: 1px solid #e5e5e5;
+    text-align: center;
+}
+
+.forum .publication{
+    border: 1px solid #000;
+    display: block;
+    float: left;
+    width: inherit;
+}
+
+.foum .publication .header-total{
+    border: 1px solid #000;
+    display: block;
+    float: left;
+    width: inherit;
+}
+
+.forum .publication .header{
+    text-align: left; !important;
+    background-color: #000;
+    height: 100px;
+    padding: 10px;
+    color: #fff;
+}
+
+.forum .publication .titulo{
+    font-size: 1.5em;
+    font-weight: bold;
+}
+
+.forum .publication .extra{
+    font-size: 0.9em;
+}
+
+.forum .publication .autor{
+    font-weight: bold;
+}
+
+.forum .publication .autor .avatar {
+    float: left;
+    width: 67px;
+    height: 89px;
+    padding: 15px;
+}
+
+.forum .publication .content{
+    display: block;
+    float: left;
+    padding: 10px 30px;
+    width: 95%;
+    text-align: justify;
+}
+
+.forum .publication .acoes{
+    display: block;
+    float: left;
+    align-content: left;
+    width: 100%;
+    height: 30px;
+    border-top: 1px solid #000;
+}
+
+.forum .essay{
+    display: block;
+    float: left;
+    width: 100%;
+}
+
+.forum .essay .extra{
+    font-size: 0.8em;
+}
+
+.forum .essay .user-data{
+    text-align: left;
+    float: left;
+    display: block;
+    height: 100px;
+    width: 6%;
+    padding: 10px;
+    color: #000000;
+}
+
+.forum .essay .user-data .autor .avatar {
+    width: 67px;
+    height: 89px;
+    padding: 3px;
+}
+
+.forum .essay .content{
+    display: block;
+    float: left;
+    padding: 10px 0;
+    width: 90%;
+}
+
+.forum .strong{
+    font-weight: bold;
+}
+
+.forum .essay .content .header{
+    text-align: left; !important;
+    background-color: #000;
+    display: block;
+    float: left;
+    height: 50px;
+    padding: 10px;
+    color: #fff;
+    width: 100%;
+}
+
+.forum .essay .content .essay{
+    text-align: justify;
+    padding: 15px 30px;
+    width: 96%;
+}
+
+.forum .essay .content .header .nome{
+    font-weight: bold;
+}
+
+.forum .essay .content .header .resposta{
+    font-size: 0.9em;
+}
+
+.forum .essay .acoes{
+    display: block;
+    float: left;
+    align-content: left;
+    border-top: 1px solid #000;
+    width: 100%;
+    height: 30px;
+}
+
+.forum .button {
+    border: none;
+    color: black;
+    padding: 5px;
+    min-width: 100px;
+    float: left;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    margin: 1px;
+    cursor: pointer;
+}
+.forum .button-green {background-color: #4CAF50; color: white; !important;}
+.forum .button-red {background-color: #f44336; color: white;}
+.forum .button-blue {background-color: #2436f4; color: white;}
+.forum .button a{
+    text-decoration: none;
+    color: inherit;
+}

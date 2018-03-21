@@ -65,12 +65,6 @@
                             echo 'Disabled';
                         } ?>
                     </button>
-                    <button class="button" value="1" id="like<?php echo $essay->id; ?>" onclick="fnLike(<?php echo $essay->id; ?>)">
-                        <?php echo ($essay->userAvaliation == 1) ? 'Liked' : 'Like';?>
-                    </button>
-                    <button class="button" value="-1" id="dislike<?php echo $essay->id; ?>" onclick="fnDislike(<?php echo $essay->id; ?>)">
-                        <?php echo ($essay->userAvaliation == -1) ? 'Disliked' : 'Dislike';?>
-                    </button>
                 </span>
             </div>
         <?php } ?>

@@ -1,0 +1,72 @@
+<?php $publication = $this->view->publication;?>
+<div class="forum">
+    <div class="publication">
+        <div class="header-total">
+            <div class="autor">
+                    <img class="avatar" src="/assets/img/user/<?php echo empty($publication->user->urlfoto)? 'default.jpg' : $publication->user->urlfoto; ?>" alt="avatar">
+            </div>
+            <div class="header">
+                <span class="titulo"><?php echo substr($publication->titulo,0,50); echo (strlen($publication->titulo) > 50)? '...'  : ' '; ?><br /></span>
+                <span class="extra">Tema: <?php echo $publication->tema;?></span><br />
+                <span class="extra">por </span>
+                <span class="autor">[<?php echo (explode(" ",$publication->user->nome))[0]; ?>]</span>
+                <span class="extra"><?php echo (implode('/',array_reverse(explode('-',$publication->data))));?></span>
+            </div>
+        </div>
+        <div class="content">
+            <?php echo $publication->conteudo; ?>
+        </div>
+        <div class="acoes">
+            <button class="button button-green"><a href="/essay/<?php echo $publication->id; ?>/create">Criar Essay</a></button>
+        </div>
+    </div>
+
+    <?php
+        if(is_array($publication->essay)) {
+            foreach($publication->essay as $essay) { ?>
+                <div class="essay">
+                    <div class="user-data">
+                        <div class="autor">
+                            <img class="avatar" src="/assets/img/user/<?php echo empty($essay->user->urlfoto)? 'default.jpg' : $essay->user->urlfoto; ?>" alt="avatar">
+                            <span class="extra">Pontos: <?php echo $essay->user->pontos;?></span>
+                        </div>
+                    </div>
+                    <div class="content">
+                        <div class="header">
+                            <span class="nome">[<?php echo (explode(" ",$essay->user->nome))[0]; ?>] - </span>
+                            <span class="titulo"><?php echo substr($essay->titulo,0,50); echo (strlen($essay->titulo) > 50)? '...'  : ''; ?></span>
+                            <?php
+                                if($essay->posicao == 1){
+                                    $posicao = 'Favor';
+                                } else if($essay->posicao == -1) {
+                                    $posicao = 'Contra';
+                                } else {
+                                    $posicao = 'Neutra';
+                                }?>
+                            <br /><span class="posicao"><?php echo $posicao;?></span>
+                            <?php if(!empty($essay->essayInOposition->titulo)){ ?>
+                                <br /><span class="resposta">Em resposta a: <span class="strong"><?php echo $essay->essayInOposition->titulo;?></span></span>
+                            <?php } ?>
+
+                        </div>
+                        <div class="essay">
+                            <?php echo $essay->conteudo; ?>
+                        </div>
+                        <div class="acoes">
+                            <button class="button button-blue" value="1" id="like<?php echo $essay->id; ?>" onclick="fnLike(<?php echo $essay->id; ?>)">
+                                <?php echo ($essay->userAvaliation == 1) ? 'Liked' : 'Like';?>
+                            </button>
+                            <button class="button button-red" value="-1" id="dislike<?php echo $essay->id; ?>" onclick="fnDislike(<?php echo $essay->id; ?>)">
+                                <?php echo ($essay->userAvaliation == -1) ? 'Disliked' : 'Dislike';?>
+                            </button>
+                            <button class="button"><a href="/forum/<?php echo $essay->id; ?>/contrapor">Comentar</a></button>
+                            <button class="button"><a href="/report/<?php echo $essay->id; ?>/create">Reportar</a></button>
+                        </div>
+                    </div>
+                </div>
+        <?php }
+        }
+    ?>
+</div>
+
+

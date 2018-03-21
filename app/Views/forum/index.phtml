@@ -1,0 +1,25 @@
+<div class="forum">
+    <div class="caption">Todas a publicações</div>
+    <div class="forum items">
+        <div id="table">
+            <div class="header-row row">
+                <div class="cell primary">Publicaçoes</div>
+                <div class="cell">Essays</div>
+                <div class="cell">Visualizações</div>
+            </div>
+            <?php foreach ($this->view->publication as $publication) { ?>
+                <div class="row">
+                    <div class="cell primary" data-label="titulo">
+                        <span class="titulo"><a href="/forum/<?php echo $publication->id; ?>/publication"> <?php echo substr($publication->titulo,0,50); echo (strlen($publication->titulo) > 50)? '...'  : ' '; ?></a><br /></span>
+                        <span class="extra">Tema: <?php echo $publication->tema;?></span><br />
+                        <span class="extra">por </span>
+                        <span class="autor">[<?php echo (explode(" ",$publication->user->nome))[0]; ?>]</span>
+                        <span class="extra"><?php echo (implode('/',array_reverse(explode('-',$publication->data))));?></span>
+                    </div>
+                    <div class="cell" data-label="essays"><?php echo count($publication->essay); ?></div>
+                    <div class="cell" data-label="essays"><?php echo $publication->clicks; ?></div>
+                </div>
+            <?php } ?>
+        </div>
+    </div>
+</div>

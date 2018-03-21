@@ -2,6 +2,7 @@
 namespace App\Controllers;
 use App\Models\EssayBaseModel;
 use App\Models\EssayLinkBaseModel;
+use App\Models\EssayOpositionBaseModel;
 use App\Models\PublicationBaseModel;
 use Core\BaseController;
 use Core\Redirect;
@@ -41,7 +42,7 @@ class EssayController extends BaseController{
             'id_publication' => $request->post->id_publication,
             'id_user' => $this->auth->id()
         ];
-        $dataLink = $request->post->url;
+
         if(Validator::make($data,$this->essay->rulesCreate(),$this->essay)){
             Redirect::route("/painel", "layout");
             return;
@@ -51,12 +52,20 @@ class EssayController extends BaseController{
             $this->essay->create($data);
             $idEssay = intval($this->essay->getLastInsertId());
             $essayLink = new EssayLinkBaseModel($this->essay->getPdo());
+
+            $dataLink = $request->post->url;
             foreach ($dataLink as $value){
                 if(!empty($value) && $value != ' '){
                     $essayLink->create(['url' => $value, 'id_essay' => $idEssay]);
                 }
             }
-            Redirect::route('/painel', ['success' => ['essay created with success.']]);
+
+            $idEssayOposition = $request->post->id;
+            if(!empty($idEssayOposition) && $idEssayOposition != 0 && $idEssayOposition != ' '){
+                $essayOposition = new EssayOpositionBaseModel($this->essay->getPdo());
+                $essayOposition->create(['id_essay' => $idEssay, 'id_essay_oposition' => $idEssayOposition]);
+            }
+            Redirect::route('/forum/'. $data['id_publication'] . '/publication', ['success' => ['essay created with success.']]);
             return;
         }catch(\Exception $e){
             Redirect::route('/painel', ['errors' => [$e->getMessage()]]);
@@ -82,7 +91,6 @@ class EssayController extends BaseController{
 
     public function delete($id){
         try{
-            ;
             if(!$this->auth->check() || $this->auth->id() != $this->essay->find($id)->id_user){
                 Redirect::route('/painel', ['errors' => ['Ahaaa! Você não pode fazer isso.']]);
                 return;

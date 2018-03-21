@@ -8,7 +8,7 @@ $route[] = ['/painel'                 ,'HomeController@painel'       ,'auth'];
 $route[] = ['/forum'                  ,'ForumController@forum'       ,'auth'];
 $route[] = ['/forum/votar'            ,'ForumController@votar'       ,'auth'];
 $route[] = ['/forum/{id}/publication' ,'ForumController@publication' ,'auth'];
-$route[] = ['/forum/{id}/essay'       ,'ForumController@essay'       ,'auth'];
+$route[] = ['/forum/{id}/contrapor'   ,'ForumController@contrapor'   ,'auth'];
 
 $route[] = ['/login'                ,'UserController@login'];
 $route[] = ['/login/auth'           ,'UserController@auth'];

@@ -12,7 +12,6 @@
                     <input readonly type="text" name="publication-tema" value ="<?php echo $this->view->essay->publication->tema; ?>" class="input-field" />
                 </label>
             </div>
-
             <div class="item">
                 <label for="publication-titulo"><span>Titulo Publicação</span>
                     <input readonly type="text" name="publication-titulo" value ="<?php echo $this->view->essay->publication->titulo; ?>" class="input-field" />
@@ -23,14 +22,12 @@
                     <input  readonly type="text" name="autor" value ="<?php echo $this->view->essay->publication->user->nome; ?>" class="input-field" />
                 </label>
             </div>
-
             <div class="form-style-2-heading"><label><span>&nbsp;</span>&nbsp;</label></div>
             <div class="item">
                 <label for="tema"><span>Titulo Redação</span>
                     <input <?php if($acao == 'detalhar') echo 'readonly'; ?> type="text" name="titulo" value ="<?php echo $this->view->essay->titulo; ?>" class="input-field" />
                 </label>
             </div>
-
             <?php
                 if(!in_array($acao, array('edit','detalhar'))) { ?>
                     <div class="item">
@@ -55,16 +52,13 @@
                     </div>
                 <?php
                 }?>
-
             <div class="item">
                 <label for="conteudo"><span>Publicação</span></label>
                 <div class="checkeditor">
                     <textarea name="conteudo"><?php echo $this->view->essay->conteudo; ?></textarea>
                 </div>
             </div>
-
             <div class="form-style-2-heading"><label><span>&nbsp;</span>References Links</label></div>
-
             <?php if(in_array($acao, array('edit','detalhar'))) {
                 foreach ($this->view->essay->essayLink as $links) { ?>
                     <div class="item">
@@ -90,7 +84,6 @@
                 </label>
             </div>
             <?php }?>
-
         </form>
     </div>
     <script>

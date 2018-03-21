@@ -23,11 +23,11 @@ class PublicationBaseModel extends BaseModel {
     public function findWhereAll(array $conditions){
         $result = parent::findWhereAll($conditions);
         $user  = new UserBaseModel($this->getPdo());
-        $essay = new EssayBaseModel($this->getPdo());
+        /*$essay = new EssayBaseModel($this->getPdo());*/
         $reference = new ReferenceBaseModel($this->getPdo());
         foreach ($result as $key => $value){
             $result[$key]->user  = $user->find($value->id_user);
-            $result[$key]->essay = $essay->findWhereAll(['id_publication' => $value->id]);
+            /*$result[$key]->essay = $essay->findWhereAll(['id_publication' => $value->id]);*/
             $result[$key]->reference = $reference->findWhereAll(['id_publication' => $value->id]);
         }
         return $result;

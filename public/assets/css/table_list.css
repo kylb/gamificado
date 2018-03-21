@@ -26,7 +26,6 @@
 .header-row {
     background: #8b8b8b;
     color: #fff;
-
 }
 
 .row {
@@ -35,7 +34,6 @@
 
 .cell {
     display: table-cell;
-
     padding: 6px;
     border-bottom: 1px solid #e5e5e5;
     text-align: center;

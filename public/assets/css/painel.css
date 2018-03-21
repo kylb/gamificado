@@ -60,7 +60,7 @@
     border: none;
     color: white;
     padding: 5px;
-    width: 80px;
+    min-width: 80px;
     text-align: center;
     text-decoration: none;
     display: inline-block;

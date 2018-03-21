@@ -1,0 +1,63 @@
+<?php $acao = $this->view->acao;?>
+<section class="painel">
+    <div class="form-style-2">
+        <div class="form-style-2-heading"><label><span>&nbsp;</span><?php echo $this->view->nome?></label></div>
+        <form action="/essay/store" method="post" enctype="multipart/form-data">
+            <input hidden type="text" name="id_publication" value ="<?php echo $this->view->essay->publication->id; ?>" />
+            <input hidden type="text" name="id" value ="<?php echo $this->view->essay->id; ?>" class="input-field" />
+            <div class="item">
+                <label for="publication-tema"><span>Tema Publicação</span>
+                    <input readonly type="text" name="publication-tema" value ="<?php echo $this->view->essay->publication->tema; ?>" class="input-field" />
+                </label>
+            </div>
+            <div class="item">
+                <label for="publication-titulo"><span>Titulo Publicação</span>
+                    <input readonly type="text" name="publication-titulo" value ="<?php echo $this->view->essay->publication->titulo; ?>" class="input-field" />
+                </label>
+            </div>
+            <div>
+                <label for="autor"><span>Autor Redação</span>
+                    <input  readonly type="text" name="autor" value ="<?php echo $this->view->essay->publication->user->nome; ?>" class="input-field" />
+                </label>
+            </div>
+            <div class="form-style-2-heading"><label><span>&nbsp;</span>&nbsp;</label></div>
+            <div class="item">
+                <label for="tema"><span>Titulo Redação</span>
+                    <input type="text" name="titulo" value ="" class="input-field" />
+                </label>
+            </div>
+            <div class="item">
+                <label for=""><span>Posicionamento</span>
+                    <select class="select-field" name="posicao">
+                        <option value="0" selected>Neutro</option>
+                        <option value="1">Favor</option>
+                        <option value="-1">Contra</option>
+                    </select>
+                </label>
+            </div>
+            <div class="item">
+                <label for="conteudo"><span>Publicação</span></label>
+                <div class="checkeditor">
+                    <textarea name="conteudo"></textarea>
+                </div>
+            </div>
+            <div class="form-style-2-heading"><label><span>&nbsp;</span>References Links</label></div>
+            <?php
+                for($i = 0; $i < 5; $i++){ ?>
+                    <div class="item">
+                        <label for=""><span>&nbsp;</span><input type="text" name="url[]" class="input-field" /></label>
+                    </div>
+                <?php
+                }
+            ?>
+            <div class="item">
+                <label for=""><span>&nbsp</span>
+                    <input type="submit" value="Criar" />
+                </label>
+            </div>
+        </form>
+    </div>
+    <script>
+        CKEDITOR.replace( 'conteudo' );
+    </script>
+</section>

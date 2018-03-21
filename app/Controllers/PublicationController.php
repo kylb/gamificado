@@ -1,5 +1,6 @@
 <?php
 namespace App\Controllers;
+use App\Models\EssayBaseModel;
 use App\Models\PublicationBaseModel;
 use App\Models\ReferenceBaseModel;
 use Core\BaseController;
@@ -67,6 +68,11 @@ class PublicationController extends BaseController{
         $this->view->nome = "Lista Publications";
         $this->view->acao = 'listar';
         $this->view->publication = $this->publication->findWhereAll(['id_user' => $this->auth->id()]);
+        $objEssay = new EssayBaseModel($this->publication->getPdo());
+        usort($this->view->publication,function ($a,$b){return $a->data < $b->data;});
+        foreach($this->view->publication as $key => $value){
+            $this->view->publication[$key]->essay = $objEssay->findWhereAll(['id_publication' => $value->id]);
+        }
         $this->setPageTitle("{$this->view->nome}");
         $this->renderView("publications/listar","layout");
     }
