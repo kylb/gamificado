@@ -1,4 +1,6 @@
-<?php $publication = $this->view->publication;?>
+<?php $publication = $this->view->publication;
+    $nome =  explode(" ",$publication->user->nome);
+?>
 <div class="forum">
     <div class="publication">
         <div class="header-total">
@@ -9,7 +11,7 @@
                 <span class="titulo"><?php echo substr($publication->titulo,0,50); echo (strlen($publication->titulo) > 50)? '...'  : ' '; ?><br /></span>
                 <span class="extra">Tema: <?php echo $publication->tema;?></span><br />
                 <span class="extra">por </span>
-                <span class="autor">[<?php echo (explode(" ",$publication->user->nome))[0]; ?>]</span>
+                <span class="autor">[<?php echo $nome[0]; ?>]</span>
                 <span class="extra"><?php echo (implode('/',array_reverse(explode('-',$publication->data))));?></span>
             </div>
         </div>
@@ -23,7 +25,9 @@
 
     <?php
         if(is_array($publication->essay)) {
-            foreach($publication->essay as $essay) { ?>
+            foreach($publication->essay as $essay) {
+                $nome =  explode(" ",$publication->user->nome);
+                ?>
                 <div class="essay">
                     <div class="user-data">
                         <div class="autor">
@@ -33,7 +37,7 @@
                     </div>
                     <div class="content">
                         <div class="header">
-                            <span class="nome">[<?php echo (explode(" ",$essay->user->nome))[0]; ?>] - </span>
+                            <span class="nome">[<?php echo $nome[0]; ?>] - </span>
                             <span class="titulo"><?php echo substr($essay->titulo,0,50); echo (strlen($essay->titulo) > 50)? '...'  : ''; ?></span>
                             <?php
                                 if($essay->posicao == 1){
