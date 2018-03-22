@@ -1,14 +1,13 @@
 <?php
 namespace App\Controllers;
 
-//use App\Models\User;
-//use Core\DataBase;
 use App\Models\UserBaseModel;
+use Core\Authenticate;
 use Core\BaseController;
 use Core\Redirect;
 use Core\Validator;
-use Core\Authenticate;
-use Core\Auth;
+
+require_once (__DIR__ . "/../emailTransport.php");
 
 class UserController extends BaseController {
 
@@ -85,15 +84,50 @@ class UserController extends BaseController {
 
         try{
             $this->user->create($data);
-            Redirect::route('/login', [
-                'success' => ['User created with success.']
+            $transport = \Transport::getTransport();
+            $raizEndereco = 'http://localhost:8080';
+            $mailer     = new \Swift_Mailer($transport);
+            $message    = new \Swift_Message('Forum UFBA - Confirmação de E-mail');
+            $message->setFrom(['lemosluan@infojr.com.br' => 'Luan']);
+            $message->setTo([$data['email'] => $data['nome']]);
+            $message->setBody(
+                        'Clique no link abaixo para confirmar o seu e-mail'
+                        . $raizEndereco . '/user/validar/' . $this->user->getLastInsertId()
+                        . '/' . preg_replace('/[^A-Za-z0-9-]/', '',$data['password'])
+            );
+            $result = $mailer->send($message);
+
+            Redirect::route('/painel', [
+                'success' => ['User created with success. ' . $result]
             ]);
+
             return;
-        }catch(Exception $e){
+        }catch(\Exception $e){
             Redirect::route('/', [
                 'errors' => [$e->getMessage()]
             ]);
             return;
+        }
+    }
+
+    public function validar($id,$token){
+        $this->view->nome = "Validar E-mail";
+        $this->setPageTitle($this->view->nome);
+        $user = $this->user->find($id);
+        if(preg_replace('/[^A-Za-z0-9-]/', '',$user->password) == $token){
+            $data = ['verificado' => 1];
+            try{
+                $this->user->update($data,$id);
+                Redirect::route('/painel', [
+                    'success' => ['User updated with success.']
+                ]);
+                return;
+            }catch(\Exception $e){
+                Redirect::route('/', [
+                    'errors' => [$e->getMessage()]
+                ]);
+                return;
+            }
         }
     }
 
@@ -170,6 +204,7 @@ class UserController extends BaseController {
             ]);
             return;
         }
+
     }
 
 }

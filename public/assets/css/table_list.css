@@ -1,11 +1,9 @@
 #table {
     display: table;
-
-    width: 100%;
+    width: inherit;
     background: #fff;
     margin: 0;
     box-sizing: border-box;
-
 }
 
 .caption {
@@ -39,6 +37,15 @@
     text-align: center;
 }
 
+.cell a{
+    text-decoration: none;
+
+}
+
+.cell a:hover{
+    text-decoration: underline;
+}
+
 .primary {
     text-align: left;
 }
@@ -46,7 +53,7 @@
 
 input[type="radio"],
 input[type="checkbox"]{
-    display: none;
+    /*display: none;*/
 }
 
 
@@ -83,7 +90,6 @@ input[type="checkbox"]{
 
     .cell {
         display: block;
-
         border: none;
         position: relative;
         height: 45px;
@@ -109,7 +115,6 @@ input[type="checkbox"]{
     .cell:nth-of-type(n+2) {
         display: none;
     }
-
 
     input[type="radio"],
     input[type="checkbox"] {

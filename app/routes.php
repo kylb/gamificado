@@ -16,6 +16,7 @@ $route[] = ['/logout'               ,'UserController@logout'    ,'auth'];
 
 $route[] = ['/user/create'          ,'UserController@create'];
 $route[] = ['/user/store'           ,'UserController@store'];
+$route[] = ['/user/validar/{id}/{token}'    ,'UserController@validar'];
 $route[] = ['/user/listar'          ,'UserController@listar'    ,'auth'];
 $route[] = ['/user/{id}/edit'       ,'UserController@edit'      ,'auth'];
 $route[] = ['/user/update'          ,'UserController@update'    ,'auth'];

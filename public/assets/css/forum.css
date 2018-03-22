@@ -14,7 +14,7 @@
 
 .forum .caption {
     display: block;
-    width: 100%;
+    width: inherit;
     background: black;
     text-align: center;
     height: 55px;
@@ -69,10 +69,10 @@
 }
 
 .forum .publication{
-    border: 1px solid #000;
+    /*border: 1px solid #000;*/
     display: block;
     float: left;
-    width: inherit;
+    width: 100%;
 }
 
 .foum .publication .header-total{
@@ -118,13 +118,27 @@
     text-align: justify;
 }
 
+.forum .references{
+    display: block;
+    float: right;
+    padding: 15px 30px 5px;
+    width: 50%;
+    text-align: justify;
+}
+.forum .references p{
+    font-size: 0.9em;
+}
+
 .forum .publication .acoes{
     display: block;
     float: left;
-    align-content: left;
     width: 100%;
     height: 30px;
     border-top: 1px solid #000;
+}
+.forum .publication .acoes .button{
+    display: block;
+    margin-left: 40%;
 }
 
 .forum .essay{

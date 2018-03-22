@@ -50,17 +50,17 @@ class Route{
 
     private function run(){
         $url = $this->getUrl();
-        $urlArray = explode('/',$url);
+        $urlArray = explode('/', $url);
         foreach($this->routes as $route){
-            $routeArray = explode('/',$route[0]);
+            $routeArray = explode('/', $route[0]);
             $param = [];
             for($i = 0; $i < count($routeArray);$i++){
                 if( ( strpos($routeArray[$i],"{") !== false ) && ( count($routeArray) == count($urlArray) ) ){
                     $routeArray[$i] = $urlArray[$i];
                     $param[] = $urlArray[$i];
                 }
-                $route[0] = implode($routeArray,'/');
             }
+            $route[0] = implode($routeArray,'/');
             if($url == $route[0] ){
                 $found = true;
                 $controller = $route[1];

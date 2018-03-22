@@ -16,6 +16,7 @@ header{
     height: auto;
     background: black;
     font-weight: bold;
+    margin-bottom: 10px;
 }
 .header-left,
 .header-right{

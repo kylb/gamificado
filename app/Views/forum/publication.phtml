@@ -17,9 +17,30 @@
         </div>
         <div class="content">
             <?php echo $publication->conteudo; ?>
-        </div>
+            <?php if(isset($publication->reference) && !empty($publication->reference)) {?>
+                <div class="references">
+                    <h4>Referências</h4>
+                    <?php
+                        foreach ($publication->reference as $reference) {
+                            if (strpos($reference->origem,'http') !== false) { ?>
+                                <p>
+                                    <a rel="noopener noreferrer" href="<?php echo $reference->origem; ?>" target="_blank">
+                                        <?php echo $reference->origem; ?>
+                                    </a>
+                                </p>
+                                <?php } else { ?>
+                                <p>
+                                    <?php echo $reference->origem; ?>
+                                </p>
+                            <?php
+                            }
+                        }
+                    ?>
+                </div>
+            </div>
+        <?php } ?>
         <div class="acoes">
-            <button class="button button-green"><a href="/essay/<?php echo $publication->id; ?>/create">Criar Essay</a></button>
+            <button class="button button-green"><a href="/essay/<?php echo $publication->id; ?>/create">Comentar Publicação</a></button>
         </div>
     </div>
 
@@ -51,10 +72,9 @@
                     <div class="content">
                         <div class="header">
                             <span class="nome">[<?php echo $autorEssay[0]; ?>] - </span>
-                            <span class="titulo"><?php echo substr($essay->titulo,0,50); echo (strlen($essay->titulo) > 50)? '...'  : ''; ?></span>
+                            <span class="titulo"><?php echo substr($essay->titulo,0,100); echo (strlen($essay->titulo) > 100)? '...'  : ''; ?></span>
                             <span class="dislikes">Dislikes: <?php echo $dislikes; ?></span>
                             <span class="likes">Likes: <?php echo $likes; ?> &nbsp; </span>
-
                             <?php
                                 if($essay->posicao == 1){
                                     $posicao = 'Favor';
@@ -67,10 +87,32 @@
                             <?php if(!empty($essay->essayInOposition->titulo)){ ?>
                                 <br /><span class="resposta">Em resposta a: [<span class="strong"><?php echo $autorEssayOposition[0];?></span>] - <span><?php echo $essay->essayInOposition->titulo;?></span>
                             <?php } ?>
-
                         </div>
                         <div class="essay">
                             <?php echo $essay->conteudo; ?>
+
+                            <?php if(isset($essay->essayLink) && !empty($essay->essayLink)) { ?>
+                            <div class="references">
+                                <h4>Referências</h4>
+                                <?php
+                                    foreach ($essay->essayLink as $link) {
+                                        if (strpos($link->url,'http') !== false) { ?>
+                                            <p>
+                                                <a rel="noopener noreferrer" href="<?php echo $link->url; ?>" target="_blank">
+                                                    <?php echo $link->url; ?>
+                                                </a>
+                                            </p>
+                                        <?php } else { ?>
+                                            <p>
+                                                <?php echo $link->url; ?>
+                                            </p>
+                                            <?php
+                                        }
+                                    }
+                                ?>
+                            </div>
+                        <?php } ?>
+
                         </div>
                         <div class="acoes">
                             <button class="button button-blue" value="1" id="like<?php echo $essay->id; ?>" onclick="fnLike(<?php echo $essay->id; ?>)">
@@ -83,7 +125,10 @@
                             <button class="button"><a href="/report/<?php echo $essay->id; ?>/create">Reportar</a></button>
 
                             <?php if($essay->id_user == $this->auth->id()) { ?>
-                                <button class="button button-red disabled">
+                                <button class="button button-green">
+                                    <a href="/essay/<?php echo $essay->id; ?>/edit"> <?php echo 'Editar' ?></a>
+                                </button>
+                                <button class="button button-red">
                                     <?php if ((count($essay->essayOposition) + $likes + $dislikes) == 0) { ?>
                                         <a href="/essay/<?php echo $essay->id; ?>/delete"
                                            onclick="return confirm('Tem certeza que deseja apagar?')"> <?php echo 'Apagar' ?></a>
