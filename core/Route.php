@@ -73,12 +73,13 @@ class Route{
             }
         }
         if($found){
-            $controller = Container::newController($controller);
+            $objController = Container::newController($controller);
+            $objController->routeData($controller,$action,$param);
             switch (count($param)){
-                case 1: $controller->$action($param[0],$this->getRequest()); break;
-                case 2: $controller->$action($param[0],$param[1],$this->getRequest()); break;
-                case 3: $controller->$action($param[0],$param[1],$param[2],$this->getRequest()); break;
-                default: $controller->$action($this->getRequest()); break;
+                case 1: $objController->$action($param[0],$this->getRequest()); break;
+                case 2: $objController->$action($param[0],$param[1],$this->getRequest()); break;
+                case 3: $objController->$action($param[0],$param[1],$param[2],$this->getRequest()); break;
+                default: $objController->$action($this->getRequest()); break;
             }
         }
         else{

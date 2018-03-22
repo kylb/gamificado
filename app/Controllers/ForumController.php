@@ -35,6 +35,9 @@ class ForumController extends BaseController{
         $this->view->publication = $this->publication->find($id);
         $objEssay = new EssayBaseModel($this->publication->getPdo());
         $this->view->publication->essay = $objEssay->findWhereAll(['id_publication' => $this->view->publication->id]);
+        foreach($this->view->publication->essay as $key => $value){
+            $this->view->publication->essay[$key]->essayInOposition = $objEssay->find($value->essayInOposition);
+        }
         $this->publication->update(['clicks' => $this->view->publication->clicks + 1],$id);
         $this->setPageTitle("{$this->view->nome}");
         $this->renderView("forum/publication","layout");

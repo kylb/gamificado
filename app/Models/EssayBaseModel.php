@@ -56,6 +56,7 @@ class EssayBaseModel extends BaseModel {
         $result->essayAvaliation           = $essayAvaliation->findWhereAll(['id_essay' => $value->id]);
         $result->userAvaliation            = $essayAvaliation->findWhere(['id_essay' => $value->id, 'id_user' => Auth::id()])->avaliacao;
         $result->essayOposition            = $essayOposition->findWhereAll(['id_essay_oposition' => $value->id]);
+        $result->essayInOposition          = $essayOposition->findWhere(['id_essay' => $value->id])->id_essay_oposition;
         $result->report                    = $report->findWhereAll(['id_essay' => $value->id]);
         return $result;
     }

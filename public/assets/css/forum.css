@@ -188,6 +188,14 @@
 .forum .essay .content .header .resposta{
     font-size: 0.9em;
 }
+.forum .essay .content .header .likes{
+    font-size: 0.9em;
+    float: right;
+}
+.forum .essay .content .header .dislikes{
+    font-size: 0.9em;
+    float: right;
+}
 
 .forum .essay .acoes{
     display: block;

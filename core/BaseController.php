@@ -11,6 +11,9 @@ abstract class BaseController{
     protected $errors;
     protected $success;
     protected $inputs;
+    protected $controller;
+    protected $action;
+    protected $param;
 
     public function __construct(){
         $this->view = new \stdClass;
@@ -70,6 +73,12 @@ abstract class BaseController{
 
     public function forbiden(){
         Redirect::route("/login");
+    }
+
+    public function routeData($controller,$action, $param){
+        $this->controller = $controller;
+        $this->action = $action;
+        $this->param = $param;
     }
 
 }

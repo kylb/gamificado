@@ -26,7 +26,20 @@
     <?php
         if(is_array($publication->essay)) {
             foreach($publication->essay as $essay) {
-                $nome =  explode(" ",$publication->user->nome);
+                $autorEssay =  explode(" ",$essay->user->nome);
+                $autorEssayOposition = explode(" ",$essay->essayInOposition->user->nome);
+
+                $likes = 0;
+                $dislikes = 0;
+                foreach ($essay->essayAvaliation as $key){
+                    if($key->avaliacao == 1){
+                        $likes++;
+                    } else {
+                        $dislikes++;
+                    }
+                }
+                $pontos = $likes - $dislikes;
+
                 ?>
                 <div class="essay">
                     <div class="user-data">
@@ -37,8 +50,11 @@
                     </div>
                     <div class="content">
                         <div class="header">
-                            <span class="nome">[<?php echo $nome[0]; ?>] - </span>
+                            <span class="nome">[<?php echo $autorEssay[0]; ?>] - </span>
                             <span class="titulo"><?php echo substr($essay->titulo,0,50); echo (strlen($essay->titulo) > 50)? '...'  : ''; ?></span>
+                            <span class="dislikes">Dislikes: <?php echo $dislikes; ?></span>
+                            <span class="likes">Likes: <?php echo $likes; ?> &nbsp; </span>
+
                             <?php
                                 if($essay->posicao == 1){
                                     $posicao = 'Favor';
@@ -49,7 +65,7 @@
                                 }?>
                             <br /><span class="posicao"><?php echo $posicao;?></span>
                             <?php if(!empty($essay->essayInOposition->titulo)){ ?>
-                                <br /><span class="resposta">Em resposta a: <span class="strong"><?php echo $essay->essayInOposition->titulo;?></span></span>
+                                <br /><span class="resposta">Em resposta a: [<span class="strong"><?php echo $autorEssayOposition[0];?></span>] - <span><?php echo $essay->essayInOposition->titulo;?></span>
                             <?php } ?>
 
                         </div>
@@ -65,6 +81,17 @@
                             </button>
                             <button class="button"><a href="/forum/<?php echo $essay->id; ?>/contrapor">Comentar</a></button>
                             <button class="button"><a href="/report/<?php echo $essay->id; ?>/create">Reportar</a></button>
+
+                            <?php if($essay->id_user == $this->auth->id()) { ?>
+                                <button class="button button-red disabled">
+                                    <?php if ((count($essay->essayOposition) + $likes + $dislikes) == 0) { ?>
+                                        <a href="/essay/<?php echo $essay->id; ?>/delete"
+                                           onclick="return confirm('Tem certeza que deseja apagar?')"> <?php echo 'Apagar' ?></a>
+                                    <?php } else {
+                                        echo 'Disabled';
+                                    } ?>
+                                </button>
+                            <?php } ?>
                         </div>
                     </div>
                 </div>
