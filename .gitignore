@@ -1,4 +1,5 @@
 app/database.php
+app/emailTransport.php
 *~
 *.idea/*
 vendor/
