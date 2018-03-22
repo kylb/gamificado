@@ -1,13 +1,12 @@
 <?php
 namespace App\Controllers;
 
+use App\Models\ConfigBaseModel;
 use App\Models\UserBaseModel;
 use Core\Authenticate;
 use Core\BaseController;
 use Core\Redirect;
 use Core\Validator;
-
-require_once (__DIR__ . "/../emailTransport.php");
 
 class UserController extends BaseController {
 
@@ -84,16 +83,22 @@ class UserController extends BaseController {
 
         try{
             $this->user->create($data);
-            $transport = \Transport::getTransport();
-            $raizEndereco = 'http://localhost:8080';
+            $lastId = $this->user->getLastInsertId();
+            $config = new ConfigBaseModel($this->user->getPdo());
+            $config = $config->all();
+            $transport  = new \Swift_SmtpTransport($config[0]->email_host,$config[0]->email_port,$config[0]->email_security);
+            $transport->setUsername($config[0]->email_user);
+            $transport->setPassword($config[0]->email_password);
+            $raizEndereco = $config[0]->email_raiz_address;
             $mailer     = new \Swift_Mailer($transport);
             $message    = new \Swift_Message('Forum UFBA - Confirmação de E-mail');
             $message->setFrom(['lemosluan@infojr.com.br' => 'Luan']);
             $message->setTo([$data['email'] => $data['nome']]);
             $message->setBody(
-                        'Clique no link abaixo para confirmar o seu e-mail'
-                        . $raizEndereco . '/user/validar/' . $this->user->getLastInsertId()
-                        . '/' . preg_replace('/[^A-Za-z0-9-]/', '',$data['password'])
+                        'Clique no link abaixo para confirmar o seu e-mail 
+                        '
+                        . $raizEndereco . '/user/validar/' . $lastId . '/'
+                        . preg_replace('/[^A-Za-z0-9-]/', '',$data['password'])
             );
             $result = $mailer->send($message);
 
@@ -104,7 +109,7 @@ class UserController extends BaseController {
             return;
         }catch(\Exception $e){
             Redirect::route('/', [
-                'errors' => [$e->getMessage()]
+                'errors' => [$e->getMessage() . $config[0]->email_host[0] . $config[0]->email_port . $config[0]->email_security]
             ]);
             return;
         }

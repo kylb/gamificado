@@ -1,6 +1,6 @@
 #table {
     display: table;
-    width: inherit;
+    width: 100%;
     background: #fff;
     margin: 0;
     box-sizing: border-box;
