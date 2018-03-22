@@ -10,7 +10,7 @@ class EssayBaseModel extends BaseModel {
     public function find($id){
         $result = parent::find($id);
 
-        $publication  = new PublicationBaseModel($this->getPdo());
+        $publication  = new PublicantionBaseModel($this->getPdo());
         $result->publication = $publication->find($result->id_publication);
 
         $user  = new UserBaseModel($this->getPdo());

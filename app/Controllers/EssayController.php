@@ -106,43 +106,43 @@ class EssayController extends BaseController{
         $this->renderView("essays/_form","layout");
     }
 
-    /*public function update($request){
-        $id = $request->post->id;
-        $essay = $this->essay->find($id);
-        $data = [
-            'tema'  => $request->post->tema,
-            'titulo' => $request->post->titulo,
-            'conteudo' => $request->post->conteudo,
-            'visivel' => $request->post->visivel
-        ];
+    // public function update($request){
+    //     $id = $request->post->id;
+    //     $essay = $this->essay->find($id);
+    //     $data = [
+    //         'tema'  => $request->post->tema,
+    //         'titulo' => $request->post->titulo,
+    //         'conteudo' => $request->post->conteudo,
+    //         'visivel' => $request->post->visivel
+    //     ];
+    //
+    //     $dataLink = $request->post->origem;
+    //
+    //     if(Validator::make($data,$this->essay->rulesUpdate($id),$this->essay)){
+    //         Redirect::route("/essay/{$id}/edit", "layout");
+    //         return;
+    //     }
+    //
+    //     if($data['visivel'] == 1 && $essay->visivel != 1){
+    //         $data['data'] = date('Y-m-d');
+    //     }
+    //
+    //     try{
+    //         $this->essay->update($data,$id);
+    //         $reference = new ReferenceBaseModel($this->essay->getPdo());
+    //         foreach ($dataLink as $key => $value){
+    //             if($reference->findWhere(['id' => $key, 'id_essay' => $id])){
+    //                 $reference->update(['origem' => $value],$key);
+    //             } else{
+    //                 $reference->create(['origem' => $value, 'id_essay' => $id]);
+    //             }
+    //         }
+    //         Redirect::route('/essay/listar', ['success' => ['User updated with success.']]);
+    //         return;
+    //     }catch(\Exception $e){
+    //         Redirect::route('/painel', ['errors' => [$e->getMessage()]]);
+    //         return;
+    //     }
+    // }
 
-        $dataLink = $request->post->origem;
-
-        if(Validator::make($data,$this->essay->rulesUpdate($id),$this->essay)){
-            Redirect::route("/essay/{$id}/edit", "layout");
-            return;
-        }
-
-        if($data['visivel'] == 1 && $essay->visivel != 1){
-            $data['data'] = date('Y-m-d');
-        }
-
-        try{
-            $this->essay->update($data,$id);
-            $reference = new ReferenceBaseModel($this->essay->getPdo());
-            foreach ($dataLink as $key => $value){
-                if($reference->findWhere(['id' => $key, 'id_essay' => $id])){
-                    $reference->update(['origem' => $value],$key);
-                } else{
-                    $reference->create(['origem' => $value, 'id_essay' => $id]);
-                }
-            }
-            Redirect::route('/essay/listar', ['success' => ['User updated with success.']]);
-            return;
-        }catch(\Exception $e){
-            Redirect::route('/painel', ['errors' => [$e->getMessage()]]);
-            return;
-        }
-    }*/
-    
 }

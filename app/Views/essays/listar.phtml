@@ -9,13 +9,13 @@
             <span class="cell">Visível</span>
             <span class="cell">Ação</span>
         </div>
-        <?php foreach ($this->view->publication as $publication) { ?>
+        <?php foreach ($this->view->essay as $essay) { ?>
             <div class="row">
-                <span class="cell" data-label="tema"><?php echo substr($publication->tema,0,25) . "..."; ?></span>
-                <span class="cell" data-label="titulo"><?php echo substr($publication->titulo,0,25) . "..."; ?></span>
-                <span class="cell" data-label="essays"><?php echo count($publication->essay); ?></span>
-                <span class="cell" data-label="conteudo"><?php echo substr(strip_tags($publication->conteudo),0,25) . "..."; ?></span>
-                <span class="cell" data-label="visivel"><?php echo ($publication->visivel == 1) ?  'Sim' : 'Não'; ?></span>
+                <span class="cell" data-label="tema"><?php echo substr($essay->tema,0,25) . "..."; ?></span>
+                <span class="cell" data-label="titulo"><?php echo substr($essay->titulo,0,25) . "..."; ?></span>
+                <span class="cell" data-label="essays"><?php echo count($essay->essay); ?></span>
+                <span class="cell" data-label="conteudo"><?php echo substr(strip_tags($essay->conteudo),0,25) . "..."; ?></span>
+                <span class="cell" data-label="visivel"><?php echo ($publicantion->visivel == 1) ?  'Sim' : 'Não'; ?></span>
                 <span class="cell" data-label="content">
                     <button class="button">
                         <a href="/publication/<?php echo $publication->id; ?>/detalhar"> <?php echo 'Detalhar' ?></a>
@@ -25,7 +25,7 @@
                     </button>
                     <button class="button button-red disabled">
                         <?php if(isset($publication->essays) && $publicantion->essays == 0){ ?>
-                        <a href="/publication/<?php echo $publication->id; ?>/delete" onclick="return confirm('Tem certeza que deseja apagar?')"> <?php echo 'Apagar' ?></a>
+                            <a href="/publication/<?php echo $publication->id; ?>/delete" onclick="return confirm('Tem certeza que deseja apagar?')"> <?php echo 'Apagar' ?></a>
                         <?php } else {echo 'Disabled';} ?>
                     </button>
                 </span>
