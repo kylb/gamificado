@@ -16,10 +16,10 @@
                 <label for="titulo"><span>Titulo</span>
                     <input <?php if($acao == 'detalhar') echo 'readonly'; ?> type="text" name="titulo" value ="<?php echo $this->view->publication->titulo; ?>" class="input-field" />
                 </label>
-            </div class="item">
+            </div>
 
             <?php if($acao == 'detalhar') { ?>
-                <div>
+                <div class="item">
                     <label for="autor"><span>Autor Redação</span>
                         <input  readonly type="text" name="autor" value ="<?php echo $this->view->publication->user->nome; ?>" class="input-field" />
                     </label>

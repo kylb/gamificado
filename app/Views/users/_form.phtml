@@ -1,36 +1,37 @@
-<div class="container">
-    <div class="caduser-page">
-        <div class="form">
-            <div class="">
-                <h3 class="panel-title"><?php echo $this->getPageTitle() ?></h3>
-            </div>
-            <form class="caduser-form" enctype="multipart/form-data" action="/user/<?php if($this->view->acao == 'edit') echo "update"; else echo "store"; ?>" method="post" accept-charset="utf-8">
-                <?php
-                    if($this->view->acao == 'edit'){
-                       echo  '<input class="input" type="hidden" name="id"';
-                       echo 'value="' . $this->view->user->id . '" />';
-                    }
-                ?>
-
-                <input class="input" type="text" name="nome"
-                    <?php
-                        if($this->view->acao == 'edit'){
-                            echo 'value="' . $this->view->user->nome . '"';
-                        } else{
-                            if(isset($this->inputs['nome']) && !empty($this->inputs['nome'])){
-                                echo 'value="' . $this->inputs['nome'] . '"';
-                            } else {
-                                echo 'placeholder="nome"';
+<?php $acao = $this->view->acao;?>
+<section class="painel">
+    <div class="form-style-2">
+        <div class="form-style-2-heading"><label><span>&nbsp;</span><?php echo $this->view->nome?></label></div>
+        <form enctype="multipart/form-data" action="/user/<?php echo ($acao == 'edit') ? 'update' : 'store'; ?>" method="post" accept-charset="utf-8">
+            <?php if($acao == 'edit'){ ?>
+                <input hidden type="text" name="id" value ="<?php echo $this->view->user->id; ?>" class="input-field" />
+            <?php } ?>
+            <div class="item">
+                <label for="nome"><span>Nome</span>
+                    <input <?php if($acao == 'detalhar') echo 'readonly'; ?> type="text" name="nome"
+                        <?php
+                            if($this->view->acao == 'edit'){
+                                echo 'value="' . $this->view->user->nome . '"';
+                            } else{
+                                if(isset($this->inputs['nome']) && !empty($this->inputs['nome'])){
+                                    echo 'value="' . $this->inputs['nome'] . '"';
+                                } else {
+                                    echo 'placeholder="nome completo"';
+                                }
                             }
-                        }
-                    ?>
-                />
+                        ?>
+                    class="input-field" />
+                </label>
                 <?php if ($this->errors['nome']): ?>
-                    <span class="help-block"><?php echo $this->errors['nome'] ?></span>
+                    <label><span>&nbsp;</span>
+                        <p class="help-block"><?php echo $this->errors['nome'] ?></p>
+                    </label>
                 <?php endif; ?>
-
-                <input class="input" type="text" name="email"
-                    <?php
+            </div>
+            <div class="item">
+                <label for="email"><span>E-mail</span>
+                    <input <?php if($acao == 'detalhar') echo 'readonly'; ?> type="text" name="email"
+                        <?php
                         if($this->view->acao == 'edit'){
                             echo ' readonly value="' . $this->view->user->email . '"';
                         } else{
@@ -40,69 +41,106 @@
                                 echo 'placeholder="email"';
                             }
                         }
-                    ?>
-                />
+                        ?>
+                    class="input-field" />
+                </label>
                 <?php if ($this->errors['email']): ?>
-                    <span class="help-block"><?php echo $this->errors['email'] ?></span>
+                    <label><span>&nbsp;</span>
+                        <p class="help-block"><?php echo $this->errors['email'] ?></p>
+                    </label>
                 <?php endif; ?>
-
-               <div class="input">
-                   <strong>Escolha Uma Foto Bonita</strong>
-                   <input class="input" type="file" name="urlfoto"/>
-               </div>
-
-                <input class="input" type="text" name="graduacao"
-                    <?php
-                        if($this->view->acao == 'edit'){
-                            echo 'value="' . $this->view->user->graduacao . '"';
-                        } else {
-                            if (isset($this->inputs['graduacao']) && !empty($this->inputs['graduacao'])) {
-                                echo 'value="' . $this->inputs['graduacao'] . '"';
+            </div>
+            <div class="item">
+                <label for="urlfoto"><span>Escolha Uma Foto Bonita</span>
+                    <input type="file" name="urlfoto" class="input-field" />
+                </label>
+            </div>
+            <div class="item">
+                <label for="graduacao"><span>Graduação</span>
+                    <input <?php if($acao == 'detalhar') echo 'readonly'; ?> type="text" name="graduacao"
+                        <?php
+                            if($this->view->acao == 'edit'){
+                                echo 'value="' . $this->view->user->graduacao . '"';
                             } else {
-                                echo 'placeholder="graduacao"';
+                                if (isset($this->inputs['graduacao']) && !empty($this->inputs['graduacao'])) {
+                                    echo 'value="' . $this->inputs['graduacao'] . '"';
+                                } else {
+                                    echo 'placeholder="graduacao"';
+                                }
                             }
-                        }
-                    ?>
-                />
+                        ?>
+                    class="input-field" />
+                </label>
                 <?php if ($this->errors['graduacao']): ?>
-                    <span class="help-block"><?php echo $this->errors['graduacao'] ?></span>
+                    <label><span>&nbsp;</span>
+                        <p class="help-block"><?php echo $this->errors['graduacao'] ?></p>
+                    </label>
                 <?php endif; ?>
-
-                <input class="input" type="text" name="dtnasc"
-                    <?php
-                        if($this->view->acao == 'edit'){
-                            echo 'value="' . implode('/', array_reverse(explode('-', $this->view->user->dtnasc))) . '"';
-                        } else {
-                            if (isset($this->inputs['dtnasc']) && !empty($this->inputs['dtnasc'])) {
-                                echo 'value="' . $this->inputs['dtnasc'] . '"';
+            </div>
+            <div class="item">
+                <label for="dtnasc"><span>Data Nascimento</span>
+                    <input <?php if($acao == 'detalhar') echo 'readonly'; ?> type="text" name="dtnasc"
+                        <?php
+                            if($this->view->acao == 'edit'){
+                                echo 'value="' . implode('/', array_reverse(explode('-', $this->view->user->dtnasc))) . '"';
                             } else {
-                                echo 'placeholder="dtnasc (dd/mm/aaaa)"';
+                                if (isset($this->inputs['dtnasc']) && !empty($this->inputs['dtnasc'])) {
+                                    echo 'value="' . $this->inputs['dtnasc'] . '"';
+                                } else {
+                                    echo 'placeholder="dd/mm/aaaa"';
+                                }
                             }
-                        }
-                    ?>
-                />
+                        ?>
+                    class="input-field" />
+                </label>
                 <?php if ($this->errors['dtnasc']): ?>
-                    <span class="help-block"><?php echo $this->errors['dtnasc'] ?></span>
+                    <label><span>&nbsp;</span>
+                        <p class="help-block"><?php echo $this->errors['dtnasc'] ?></p>
+                    </label>
                 <?php endif; ?>
+            </div>
 
-                <input class="input" type="password" name="password" placeholder="password" />
+            <div class="item">
+                <label for="password"><span>Password</span>
+                    <input type="password" name="password" placeholder="password" class="input-field" />
+                </label>
                 <?php if ($this->errors['password']): ?>
-                    <span class="help-block"><?php echo $this->errors['password'] ?></span>
+                    <label><span>&nbsp;</span>
+                        <p class="help-block"><?php echo $this->errors['password'] ?></p>
+                    </label>
                 <?php endif; ?>
+            </div>
+            <?php
+            if(!in_array($acao, array('edit','detalhar'))) { ?>
+                <div class="item">
+                    <label for=""><span>Tipo Usuário</span>
+                        <select class="select-field" name="tipo">
+                            <option value="1">Admin</option>
+                            <option value="2" selected>Comum</option>
+                        </select>
+                    </label>
+                </div>
+                <?php
+            } else {?>
+                <div class="item">
+                    <label for=""><span>Tipo Usuário</span>
+                        <select class="select-field" name="tipo" <?php echo ($acao == 'detalhar') ? 'disabled' : ''?>>
+                            <option value="1" <?php echo ($this->view->user->tipo == 1) ? 'selected' : '' ?>>Admin</option>
+                            <option value="2" <?php echo ($this->view->user->tipo == 2) ? 'selected' : '' ?>>Comum</option>
+                        </select>
+                    </label>
+                </div>
+                <?php
+            }?>
 
-                    <?php if($this->auth->check() && $this->auth->tipo() == 1) { ?>
-                        <div class="input">
-                            <input  type="radio" name="tipo" value="1" <?php if($this->view->user->tipo == 1) echo "checked"?>/> Admin
-                            <input  type="radio" name="tipo" value="2"
-                                <?php if($this->view->user->tipo == 2) echo "checked";?>
-                                <?php if(!isset($this->view->user->tipo)) echo "checked";?>
-                            /> Comum
-                        </div>
-                    <?php } else { ?>
-                        <input  type="hidden" name="tipo" value="2" checked />
-                    <?php } ?>
-                <button type="submit" class="btn"><?php if($this->view->acao == 'edit') echo 'Editar'; else echo 'Cadastrar'; ?></button>
-            </form>
-        </div>
+            <?php if(in_array($acao, array('edit','create'))) { ?>
+                <div class="item">
+                    <label for=""><span>&nbsp</span>
+                        <input type="submit" value="<?php echo ($acao == 'edit') ? 'Editar' : 'Criar'?>" />
+                    </label>
+                </div>
+            <?php }?>
+        </form>
     </div>
-</div>
+</section>
+
