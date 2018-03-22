@@ -57,6 +57,22 @@
 
 }
 
+#about {
+    margin: 1em auto;
+    width: 95%;
+    height: 300px;
+    color: #4682B4;
+    text-align: center;
+}
+
+#title1 {
+    color: #696969;
+}
+
+#author {
+    text-indent: 19%;
+}
+
 footer {
     display: block;
     float: left;
