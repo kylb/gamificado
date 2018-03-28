@@ -1,0 +1,23 @@
+<section class="painel">
+    <div class="caption"><?php echo $this->view->nome;?></div>
+    <div id="table">
+        <div class="header-row row">
+            <span class="cell">Tema</span>
+            <span class="cell">Título</span>
+            <span class="cell">Conteúdo</span>
+            <span class="cell">Ação</span>
+
+        </div>
+        <?php foreach ($this->view->publication as $publication) { ?>
+            <div class="row">
+                <span class="cell" data-label="tema"><?php echo $publication->tema; ?></span>
+                <span class="cell" data-label="titulo"><?php echo $publication->titulo; ?></span>
+                <span class="cell" data-label="conteudo"><?php echo $publication->conteudo; ?></span>
+                <span class="cell" data-label="content">
+                    <button class="button button-green1">
+                        <a href="/forum/<?php echo $publication->id; ?>/listar"> <?php echo 'Ver Comentários' ?></a>
+                    </button>
+            </div>
+        <?php } ?>
+    </div>
+</section>

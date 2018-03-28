@@ -69,6 +69,7 @@
     cursor: pointer;
 }
 .button-green {background-color: #4CAF50;}
+.button-green1 {background-color: #4CAF50; width: 40%;}
 .button-red {background-color: #f44336;}
 .button a{
     text-decoration: none;

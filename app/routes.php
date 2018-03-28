@@ -39,4 +39,7 @@ $route[] = ['/publication/update'       ,'PublicationController@update'   ,'auth
 $route[] = ['/publication/{id}/detalhar','PublicationController@detalhar' ,'auth'];
 $route[] = ['/publication/{id}/delete'  ,'PublicationController@delete'  ,'auth'];
 
+$route[] = ['/forum'                       ,'ForumController@forum'];
+$route[] = ['/forum/{id}/listar'                ,'ForumController@listar'];
+
 return $route;
