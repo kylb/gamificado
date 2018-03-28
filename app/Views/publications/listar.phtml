@@ -24,7 +24,7 @@
                         <a href="/publication/<?php echo $publication->id; ?>/edit"> <?php echo 'Editar' ?></a>
                     </button>
                     <button class="button button-red disabled">
-                        <?php if(isset($publication->essays) && $publicantion->essays == 0){ ?>
+                        <?php if(count($publication->essay) == 0){ ?>
                             <a href="/publication/<?php echo $publication->id; ?>/delete" onclick="return confirm('Tem certeza que deseja apagar?')"> <?php echo 'Apagar' ?></a>
                         <?php } else {echo 'Disabled';} ?>
                     </button>
