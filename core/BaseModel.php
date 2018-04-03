@@ -43,9 +43,9 @@ abstract class BaseModel{
     }
 
         public function findEssays($id){
-        $query = "SELECT * FROM  {$this->table} WHERE id_publication =id";
+        $query = "SELECT * FROM  {$this->table} WHERE id_publication =$id";
         $stmt = $this->pdo->prepare($query);
-        $stmt->bindValue(":id",$id);
+        $stmt->bindValue($id);
         $stmt->execute();
         $result = $stmt->fetchAll();
         $stmt->closeCursor();

@@ -22,7 +22,7 @@ class ForumController extends BaseController
 	{
 		$this->setPageTitle('Listar Forum');
 		$model = new EssaysBaseModel();
-		$this->view->publication = $model->findEssays();
+		$this->view->publication = $model->findEssays($id);
 		$this->renderView("forum/table1","layout");
 	}
 
