@@ -42,6 +42,16 @@ abstract class BaseModel{
         return $result;
     }
 
+        public function findEssays($id){
+        $query = "SELECT * FROM  {$this->table} WHERE id_publication =$id";
+        $stmt = $this->pdo->prepare($query);
+        $stmt->bindValue($id);
+        $stmt->execute();
+        $result = $stmt->fetchAll();
+        $stmt->closeCursor();
+        return $result;
+    }
+
 
     public function create(array $data){
         $data = $this->prepareDataInsert($data);

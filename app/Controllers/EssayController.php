@@ -1,6 +1,6 @@
 <?php
 namespace App\Controllers;
-use App\Models\EssayBaseModel;
+use App\Models\EssaysBaseModel;
 use Core\BaseController;
 use Core\Redirect;
 use Core\Validator;
@@ -11,7 +11,7 @@ class EssayController extends BaseController{
 
     public function __construct() {
         parent::__construct();
-        $this->essay = new EssayBaseModel;
+        $this->essay = new EssaysBaseModel;
     }
 
     public function create(){
@@ -25,7 +25,7 @@ class EssayController extends BaseController{
         $this->renderView("essays/_form","layout");
     }
 
-    /*public function store($request){
+   public function store($request){
         if(!$this->auth->check() || $this->auth->tipo() != 1 ){
             Redirect::route('/painel', ['errors' => ['Ahaaa! Você não pode fazer isso.']]);
             return;
@@ -60,7 +60,8 @@ class EssayController extends BaseController{
             Redirect::route('/painel', ['errors' => [$e->getMessage()]]);
             return;
         }
-    }*/
+    }
+
 
     public function listar(){
         $this->view->nome = "Lista essays";

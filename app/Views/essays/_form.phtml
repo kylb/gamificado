@@ -2,9 +2,9 @@
 <section class="painel">
     <div class="form-style-2">
         <div class="form-style-2-heading"><label><span>&nbsp;</span><?php echo $this->view->nome?></label></div>
-        <form action="/publication/<?php echo ($acao == 'edit') ? 'update' : 'store' ?>" method="post" enctype="multipart/form-data">
+        <form action="/essay/<?php echo ($acao == 'edit') ? 'update' : 'store' ?>" method="post" enctype="multipart/form-data">
             <?php if($acao == 'edit'){ ?>
-                <input hidden type="text" name="id" value ="<?php echo $this->view->publication->id; ?>" class="input-field" />
+                <input hidden type="text" name="id" value ="<?php echo $this->view->essay->id; ?>" class="input-field" />
             <?php } ?>
             <div class="item">
                 <label for="tema"><span>Tema</span>
@@ -21,7 +21,7 @@
             <?php if($acao == 'detalhar') { ?>
                 <div>
                     <label for="autor"><span>Autor Redação</span>
-                        <input  readonly type="text" name="autor" value ="<?php echo $this->view->publication->user->nome; ?>" class="input-field" />
+                        <input  readonly type="text" name="autor" value ="<?php echo $this->view->essay->user->nome; ?>" class="input-field" />
                     </label>
                 </div>
             <?php }?>
